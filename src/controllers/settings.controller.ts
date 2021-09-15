@@ -1,6 +1,8 @@
-import { Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { AuthorizeGuard } from 'src/security/guards/authorize.guard';
 
 @Controller('settings')
+@UseGuards(AuthorizeGuard)
 export class SettingsController {
 
   @Get()

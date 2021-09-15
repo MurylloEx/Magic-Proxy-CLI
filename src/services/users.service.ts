@@ -10,6 +10,10 @@ export class UsersService {
     @InjectRepository(UserModel)
     private Users: Repository<UserModel>){}
 
+  async findByName(name: string): Promise<UserModel[]> {
+    return this.Users.find({name});
+  }
+  
   async findAll(): Promise<UserModel[]> {
     return this.Users.find();
   }

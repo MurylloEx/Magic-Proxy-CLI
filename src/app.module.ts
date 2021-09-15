@@ -4,14 +4,16 @@ import { ProxyModule } from './modules/proxy.module';
 import { UsersModule } from './modules/users.module';
 import { DatabaseModule } from './modules/database.module';
 import { SettingsModule } from './modules/settings.module';
+import { AuthModule } from './modules/auth.module';
 
 @Module({
   imports: [
     DatabaseModule,
-    UsersModule,
     SettingsModule,
-    TlsModule,
-    ProxyModule
+    UsersModule,
+    ProxyModule,
+    AuthModule,
+    TlsModule
   ],
   providers: [],
   controllers: []

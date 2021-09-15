@@ -1,4 +1,5 @@
-import { Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import { Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { AuthorizeGuard } from 'src/security/guards/authorize.guard';
 
 @Controller('tls')
 export class TlsController {
