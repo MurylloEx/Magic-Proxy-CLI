@@ -50,13 +50,6 @@ export class SettingsModel extends BaseEntity {
   @Column()
   public hstsEnabled?: boolean = false;
 
-  @IsDefined()
-  @IsInt()
-  @Max(65535)
-  @Min(0)
-  @Column()
-  public dashboardPort?: number = 3388;
-
   @BeforeInsert()
   @BeforeUpdate()
   async validate() {

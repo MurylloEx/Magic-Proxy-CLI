@@ -5,6 +5,7 @@ import { TlsService } from 'src/services/tls.service';
 import { HttpExceptionFilter } from 'src/filters/http-exception.filter';
 import { AuthorizeGuard } from 'src/security/guards/authorize.guard';
 import { TlsModel } from 'src/models/tls.model';
+import { MagicProxyService } from 'src/services/magic.proxy.service';
 
 @Controller('tls')
 @UseGuards(AuthorizeGuard)
@@ -12,7 +13,9 @@ import { TlsModel } from 'src/models/tls.model';
 @UsePipes(ValidationPipe)
 export class TlsController {
 
-  constructor(private tlsService: TlsService){}
+  constructor(
+    private tlsService: TlsService,
+    private magicProxyService: MagicProxyService){}
 
   @Get()
   @Roles(KnownRoles.Manager)
@@ -23,13 +26,16 @@ export class TlsController {
   @Post()
   @Roles(KnownRoles.Manager)
   public async addTls(@Body() data: TlsModel){
-    return await this.tlsService.insert(data);
+    const response = await this.tlsService.insert(data);
+    await this.magicProxyService.reloadProxy();
+    return response;
   }
 
   @Delete(':id')
   @Roles(KnownRoles.Manager)
   public async deleteTls(@Param('id') id: string){
     await this.tlsService.remove(id);
+    await this.magicProxyService.reloadProxy();
     return { success: true }
   }
 

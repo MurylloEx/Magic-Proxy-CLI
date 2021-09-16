@@ -5,6 +5,7 @@ import { Roles } from 'src/security/decorators/roles.decorator';
 import { SettingsService } from 'src/services/settings.service';
 import { HttpExceptionFilter } from 'src/filters/http-exception.filter';
 import { SettingsModel } from 'src/models/settings.model';
+import { MagicProxyService } from 'src/services/magic.proxy.service';
 
 @Controller('settings')
 @UseGuards(AuthorizeGuard)
@@ -12,7 +13,9 @@ import { SettingsModel } from 'src/models/settings.model';
 @UsePipes(ValidationPipe)
 export class SettingsController {
 
-  constructor(private settingsService: SettingsService){}
+  constructor(
+    private settingsService: SettingsService,
+    private magicProxyService: MagicProxyService){}
 
   @Get()
   @Roles(KnownRoles.Manager)
@@ -23,13 +26,16 @@ export class SettingsController {
   @Post()
   @Roles(KnownRoles.Manager)
   public async addSetting(@Body() data: SettingsModel){
-    return await this.settingsService.insert(data);
+    const response = await this.settingsService.insert(data);
+    await this.magicProxyService.reloadProxy();
+    return response;
   }
 
   @Delete()
   @Roles(KnownRoles.Manager)
   public async deleteSetting(@Param('id') id: string){
     await this.settingsService.remove(id);
+    await this.magicProxyService.reloadProxy();
     return { success: true }
   }
 

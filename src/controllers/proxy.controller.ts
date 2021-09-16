@@ -5,6 +5,7 @@ import { Roles as KnownRoles } from 'src/security/roles.enum';
 import { Roles } from 'src/security/decorators/roles.decorator';
 import { ProxyService } from 'src/services/proxy.service';
 import { ProxyModel } from 'src/models/proxy.model';
+import { MagicProxyService } from 'src/services/magic.proxy.service';
 
 @Controller('proxy')
 @UseGuards(AuthorizeGuard)
@@ -12,7 +13,9 @@ import { ProxyModel } from 'src/models/proxy.model';
 @UsePipes(ValidationPipe)
 export class ProxyController {
 
-  constructor(private proxyService: ProxyService){}
+  constructor(
+    private proxyService: ProxyService,
+    private magicProxyService: MagicProxyService){}
 
   @Get()
   @Roles(KnownRoles.Manager)
@@ -23,19 +26,24 @@ export class ProxyController {
   @Post()
   @Roles(KnownRoles.Manager)
   public async addProxy(@Body() data: ProxyModel){
-    return await this.proxyService.insert(data);
+    const response = await this.proxyService.insert(data);
+    await this.magicProxyService.reloadProxy();
+    return response;
   }
 
   @Put(':id')
   @Roles(KnownRoles.Manager)
   public async updateProxy(@Param('id') id: string, @Body() data: ProxyModel){
-    return await this.proxyService.updateOne(id, data);
+    const response = await this.proxyService.updateOne(id, data);
+    await this.magicProxyService.reloadProxy();
+    return response;
   }
 
   @Delete(':id')
   @Roles(KnownRoles.Manager)
   public async deleteProxy(@Param('id') id: string){
     await this.proxyService.remove(id);
+    await this.magicProxyService.reloadProxy();
     return { success: true }
   }
 
