@@ -11,7 +11,7 @@ import { JwtAuthProvider } from 'src/security/guards/jwt.auth.guard';
     UsersModule,
     JwtModule.register({
       secret: '<secret-key-here>',
-      signOptions: { expiresIn: '86400s' },
+      signOptions: { expiresIn: '1d' },
     })
   ],
   providers: [

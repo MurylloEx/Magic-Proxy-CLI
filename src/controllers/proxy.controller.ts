@@ -2,15 +2,17 @@ import { Body, Controller, Delete, Get, Param, Post, Put, UseFilters, UseGuards,
 import { HttpExceptionFilter } from 'src/filters/http-exception.filter';
 import { AuthorizeGuard } from 'src/security/guards/authorize.guard';
 import { Roles as KnownRoles } from 'src/security/roles.enum';
-import { Roles } from 'src/security/decorators/roles.decorator';
+import { Roles } from 'src/security/roles.decorator';
 import { ProxyService } from 'src/services/proxy.service';
 import { ProxyModel } from 'src/models/proxy.model';
 import { MagicProxyService } from 'src/services/magic.proxy.service';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller('proxy')
 @UseGuards(AuthorizeGuard)
 @UseFilters(HttpExceptionFilter)
 @UsePipes(ValidationPipe)
+@ApiBearerAuth()
 export class ProxyController {
 
   constructor(

@@ -2,14 +2,16 @@ import { Body, Controller, Delete, Get, Param, Put, UseFilters, UseGuards, UsePi
 import { HttpExceptionFilter } from 'src/filters/http-exception.filter';
 import { AuthorizeGuard } from 'src/security/guards/authorize.guard';
 import { Roles as KnownRoles } from 'src/security/roles.enum';
-import { Roles } from 'src/security/decorators/roles.decorator';
+import { Roles } from 'src/security/roles.decorator';
 import { UsersService } from 'src/services/users.service';
 import { UserModel } from 'src/models/user.model';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller('users')
 @UseGuards(AuthorizeGuard)
 @UseFilters(HttpExceptionFilter)
 @UsePipes(ValidationPipe)
+@ApiBearerAuth()
 export class UsersController {
 
   constructor(private usersService: UsersService){}

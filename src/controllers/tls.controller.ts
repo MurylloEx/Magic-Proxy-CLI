@@ -1,16 +1,18 @@
 import { Body, Controller, Delete, Get, Param, Post, UseFilters, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { Roles as KnownRoles } from 'src/security/roles.enum';
-import { Roles } from 'src/security/decorators/roles.decorator';
+import { Roles } from 'src/security/roles.decorator';
 import { TlsService } from 'src/services/tls.service';
 import { HttpExceptionFilter } from 'src/filters/http-exception.filter';
 import { AuthorizeGuard } from 'src/security/guards/authorize.guard';
 import { TlsModel } from 'src/models/tls.model';
 import { MagicProxyService } from 'src/services/magic.proxy.service';
+import { ApiBearerAuth } from '@nestjs/swagger';
 
 @Controller('tls')
 @UseGuards(AuthorizeGuard)
 @UseFilters(HttpExceptionFilter)
 @UsePipes(ValidationPipe)
+@ApiBearerAuth()
 export class TlsController {
 
   constructor(
