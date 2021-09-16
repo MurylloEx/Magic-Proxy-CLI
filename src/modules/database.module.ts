@@ -4,9 +4,6 @@ import { ProxyModel } from 'src/models/proxy.model';
 import { SettingsModel } from 'src/models/settings.model';
 import { TlsModel } from 'src/models/tls.model';
 import { UserModel } from 'src/models/user.model';
-import { TlsModule } from './tls.module';
-import { ProxyModule } from './proxy.module';
-import { AuthModule } from './auth.module';
 
 @Module({
   imports: [
@@ -22,10 +19,7 @@ import { AuthModule } from './auth.module';
         ProxyModel,
         SettingsModel
       ]
-    }),
-    TlsModule,
-    ProxyModule,
-    AuthModule
+    })
   ],
   providers: []
 })

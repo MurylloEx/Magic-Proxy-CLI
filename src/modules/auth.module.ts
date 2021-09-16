@@ -18,7 +18,7 @@ import { AuthorizeProvider } from 'src/security/guards/authorize.guard';
   providers: [
     AuthService,
     JwtStrategy, 
-    AuthorizeProvider,
+    // AuthorizeProvider,
     JwtAuthProvider
   ],
   controllers: [AuthController]

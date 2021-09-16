@@ -3,13 +3,13 @@ export const Roles = {
   Administrator: 'admin'
 }
 
-export const RoleKeys = Object.keys(Roles).map(v => v);
+export const RoleKeys = Object.values(Roles);
 
 export function getRolesFromBits(role: number): string[] {
   let roleKeys: number[] = [];
-  for (let k = 0; k < Object.keys(Roles).length; k++){
-    if (role && (k + 1) == (k + 1))
-      roleKeys.push(k + 1);
-  }
+  RoleKeys.map((v, k) => {
+    if ((role & (k + 1)) == (k + 1))
+      roleKeys.push(k);
+  });
   return roleKeys.map(v => RoleKeys[v]);
 }
