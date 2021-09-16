@@ -30,7 +30,7 @@
     "class-transformer": "^0.4.0",
     "class-validator": "^0.13.1",
     "ejs": "^3.1.6",
-    "magic-reverse-proxy": "^2.2.19",
+    "magic-reverse-proxy": "^2.3.21",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",

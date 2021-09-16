@@ -5,6 +5,7 @@ import { AuthService } from 'src/services/auth.service';
 import { JwtStrategy } from 'src/services/jwt.strategy.service';
 import { AuthController } from 'src/controllers/auth.controller';
 import { JwtAuthProvider } from 'src/security/guards/jwt.auth.guard';
+import { MagicProxyModule } from './magic.proxy.module';
 
 @Module({
   imports: [
@@ -12,7 +13,8 @@ import { JwtAuthProvider } from 'src/security/guards/jwt.auth.guard';
     JwtModule.register({
       secret: '<secret-key-here>',
       signOptions: { expiresIn: '86400s' },
-    })
+    }),
+    MagicProxyModule
   ],
   providers: [
     AuthService,

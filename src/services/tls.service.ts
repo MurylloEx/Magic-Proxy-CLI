@@ -18,6 +18,12 @@ export class TlsService {
     return this.Tls.findOne(id);
   }
 
+  async findLast(): Promise<TlsModel>{
+    return this.Tls.findOne({ 
+      order: { timestamp: 'DESC' } 
+    });
+  }
+
   async updateOne(id: string, user: Partial<TlsModel>): Promise<TlsModel> {
     let found = await this.Tls.findOne(id);
     if (!found)

@@ -7,6 +7,7 @@ import { ProxyService } from 'src/services/proxy.service';
 @Module({
   imports: [TypeOrmModule.forFeature([ProxyModel])],
   controllers: [ProxyController],
-  providers: [ProxyService]
+  providers: [ProxyService],
+  exports: [ProxyService]
 })
 export class ProxyModule {}

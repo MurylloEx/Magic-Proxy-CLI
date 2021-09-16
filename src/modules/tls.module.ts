@@ -7,6 +7,7 @@ import { TlsController } from 'src/controllers/tls.controller';
 @Module({
   imports: [TypeOrmModule.forFeature([TlsModel])],
   controllers: [TlsController],
-  providers: [TlsService]
+  providers: [TlsService],
+  exports: [TlsService]
 })
 export class TlsModule {}

@@ -1,11 +1,15 @@
 import { BaseEntity, BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { IsDefined, MaxLength, validateOrReject } from "class-validator";
+import { IsDefined, MaxLength, ValidateIf, validateOrReject } from "class-validator";
 
 @Entity({ name: 'sys_tls' })
 export class TlsModel extends BaseEntity {
 
   @PrimaryGeneratedColumn('uuid')
   public id?: string;
+
+  @ValidateIf(o => false)
+  @Column()
+  public timestamp?: number = +new Date;
 
   @IsDefined()
   @MaxLength(131072)

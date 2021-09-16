@@ -18,6 +18,12 @@ export class SettingsService {
     return this.Settings.findOne(id);
   }
 
+  async findLast(): Promise<SettingsModel>{
+    return this.Settings.findOne({ 
+      order: { timestamp: 'DESC' } 
+    });
+  }
+
   async updateOne(id: string, user: Partial<SettingsModel>): Promise<SettingsModel> {
     let found = await this.Settings.findOne(id);
     if (!found)

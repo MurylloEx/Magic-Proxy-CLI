@@ -1,5 +1,5 @@
 import { BaseEntity, BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { IsDefined, IsInt, IsUUID, Matches, MaxLength, MinLength, validateOrReject } from "class-validator";
+import { IsDefined, IsInt, IsUUID, Matches, MaxLength, MinLength, ValidateIf, validateOrReject } from "class-validator";
 
 @Entity({ name: 'sys_users' })
 export class UserModel extends BaseEntity {
@@ -7,10 +7,14 @@ export class UserModel extends BaseEntity {
   @PrimaryGeneratedColumn('uuid')
   public id?: string;
 
+  @ValidateIf(o => false)
+  @Column()
+  public timestamp?: number = +new Date;
+
   @IsDefined()
   @MaxLength(64)
   @MinLength(4)
-  @Matches(/[a-zA-Z0-9_\-@$!#.]+/gm)
+  @Matches(/[a-zA-Z0-9_\-@$!#.]+/m)
   @Column()
   public name?: string;
 

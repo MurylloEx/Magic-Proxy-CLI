@@ -1,11 +1,15 @@
 import { BaseEntity, BeforeInsert, BeforeUpdate, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
-import { IsBoolean, IsDefined, IsInt, Max, Min, validateOrReject } from "class-validator";
+import { IsBoolean, IsDefined, IsInt, Max, Min, ValidateIf, validateOrReject } from "class-validator";
 
 @Entity({ name: 'sys_settings' })
 export class SettingsModel extends BaseEntity {
 
   @PrimaryGeneratedColumn('uuid')
   public id?: string;
+
+  @ValidateIf(o => false)
+  @Column()
+  public timestamp?: number = +new Date;
 
   @IsDefined()
   @IsBoolean()

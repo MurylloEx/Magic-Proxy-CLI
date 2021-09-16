@@ -7,6 +7,7 @@ import { SettingsController } from 'src/controllers/settings.controller';
 @Module({
   imports: [TypeOrmModule.forFeature([SettingsModel])],
   controllers: [SettingsController],
-  providers: [SettingsService]
+  providers: [SettingsService],
+  exports: [SettingsService]
 })
 export class SettingsModule {}
