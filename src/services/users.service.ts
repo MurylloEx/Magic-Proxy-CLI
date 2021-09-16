@@ -24,11 +24,10 @@ export class UsersService {
 
   async updateOne(id: string, user: Partial<UserModel>): Promise<UserModel> {
     let found = await this.Users.findOne(id);
-    if (!!found){
-      await this.Users.update({id}, user);
-      return this.Users.merge(found, user);
-    }
-    return null;
+    if (!found)
+      return null;
+    await this.Users.update({id}, user);
+    return this.Users.merge(found, user);
   }
 
   async remove(id: string): Promise<void> {

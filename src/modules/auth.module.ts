@@ -5,7 +5,6 @@ import { AuthService } from 'src/services/auth.service';
 import { JwtStrategy } from 'src/services/jwt.strategy.service';
 import { AuthController } from 'src/controllers/auth.controller';
 import { JwtAuthProvider } from 'src/security/guards/jwt.auth.guard';
-import { AuthorizeProvider } from 'src/security/guards/authorize.guard';
 
 @Module({
   imports: [
@@ -18,7 +17,6 @@ import { AuthorizeProvider } from 'src/security/guards/authorize.guard';
   providers: [
     AuthService,
     JwtStrategy, 
-    // AuthorizeProvider,
     JwtAuthProvider
   ],
   controllers: [AuthController]

@@ -1,4 +1,4 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { UserModel } from 'src/models/user.model';
 import { UsersService } from './users.service';
@@ -11,20 +11,12 @@ export class AuthService {
     private usersService: UsersService){}
 
   public async checkCredentials(name: string, token: string){
-    throw new HttpException('', 403);
-    let found = await this.usersService.findByName(name);
-    if (!!found[0] && (found[0].token == token))
-      return true;
-    return false;
+    let [user] = await this.usersService.findByName(name);
+    return (!!user && (user.token == token));
   } 
 
-  public async buildToken(user: UserModel){
-    return this.jwtService.signAsync({
-      id: user.id,
-      name: user.name,
-      token: user.token,
-      role: user.role
-    });
+  public async buildToken({id, name, token, role}: UserModel){
+    return this.jwtService.signAsync({id, name, token, role});
   }
 
 }

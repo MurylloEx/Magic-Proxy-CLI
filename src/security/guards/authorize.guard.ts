@@ -1,6 +1,6 @@
 import { Request } from 'express';
 import { Observable } from 'rxjs';
-import { APP_GUARD, Reflector } from '@nestjs/core';
+import { Reflector } from '@nestjs/core';
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
 import { getRolesFromBits } from '../roles.enum';
 
@@ -25,7 +25,3 @@ export class AuthorizeGuard implements CanActivate {
   }
 }
 
-export const AuthorizeProvider = {
-  provide: APP_GUARD,
-  useClass: AuthorizeGuard
-}
