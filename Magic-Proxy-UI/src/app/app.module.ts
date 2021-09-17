@@ -9,6 +9,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
@@ -49,6 +50,7 @@ import { MagicAuthComponent } from './pages/magic-auth/magic-auth.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    InputTextareaModule,
     ToggleButtonModule,
     OverlayPanelModule,
     InputSwitchModule,

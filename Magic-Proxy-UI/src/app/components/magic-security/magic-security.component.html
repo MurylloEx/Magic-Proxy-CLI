@@ -1,3 +1,22 @@
 <magic-section mgIcon="pi-shield" mgTitle="Security settings">
   
+  <div class="p-inputgroup p-mt-2">
+    <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
+    <textarea pInputTextarea type="text" rows="8" placeholder="Private key in .PEM format..."></textarea>
+  </div>
+
+  <div class="p-inputgroup p-mt-2">
+    <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
+    <textarea pInputTextarea type="text" rows="8" placeholder="Public key and certificate in .PEM format..."></textarea>
+  </div>
+
+  <div class="p-text-center p-mt-4">
+    <button
+      pRipple
+      pButton
+      class="p-button-success p-button-outlined p-button-rounded"
+      label="Apply changes">
+    </button>
+  </div>
+
 </magic-section>
