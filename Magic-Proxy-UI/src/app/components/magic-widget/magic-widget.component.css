@@ -1,0 +1,22 @@
+.mg-local-widget-size {
+  width:64px;
+  height:64px;
+  border: 1px solid #81D4FA;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.mg-local-widget-size:hover {
+  cursor: pointer;
+  background-color: var(--blue-300)!important;
+  transition: background-color 0.5s;
+}
+
+.mg-local-widget-icon {
+  font-size: 1.5rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 50%;
+  transform: translate(-50%, -50%);
+}

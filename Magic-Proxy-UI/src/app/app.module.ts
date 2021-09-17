@@ -9,13 +9,13 @@ import { RippleModule } from 'primeng/ripple';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { MagicSectionComponent } from './components/magic-section/magic-section.component';
 import { MagicHeaderComponent } from './components/magic-header/magic-header.component';
 import { MagicFooterComponent } from './components/magic-footer/magic-footer.component';
 import { MagicWidgetComponent } from './components/magic-widget/magic-widget.component';
-import { MagicSectionComponent } from './components/magic-section/magic-section.component';
 import { MagicLoginComponent } from './components/magic-login/magic-login.component';
-import { MagicAuthComponent } from './pages/magic-auth/magic-auth.component';
 import { MagicPanelComponent } from './pages/magic-panel/magic-panel.component';
+import { MagicAuthComponent } from './pages/magic-auth/magic-auth.component';
 
 @NgModule({
   declarations: [

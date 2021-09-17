@@ -12,4 +12,8 @@ export class MagicPanelComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  doClick(event){
+    console.log(event)
+  }
+
 }
