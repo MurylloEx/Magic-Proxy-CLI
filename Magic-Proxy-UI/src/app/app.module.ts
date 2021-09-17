@@ -5,6 +5,7 @@ import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { RippleModule } from 'primeng/ripple';
+import { TooltipModule } from 'primeng/tooltip';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -34,7 +35,8 @@ import { MagicAuthComponent } from './pages/magic-auth/magic-auth.component';
     CardModule,
     ButtonModule,
     InputTextModule,
-    RippleModule
+    RippleModule,
+    TooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

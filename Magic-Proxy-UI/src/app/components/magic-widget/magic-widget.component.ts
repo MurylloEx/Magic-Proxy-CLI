@@ -11,6 +11,7 @@ export class MagicWidgetComponent implements OnInit {
   @Input() mgIcon: string = "";
   @Input() mgClass: string = "";
   @Input() mgStyle: string = "";
+  @Input() mgTitle: string = "";
   @Output() click: EventEmitter<any> = new EventEmitter<any>();
   
   constructor() { }
