@@ -3,4 +3,14 @@
 /* Tema do PrimeNG (Saga Blue) */
 @import '~primeng/resources/themes/vela-orange/theme.css';
 @import './components.css';
-@import './fonts.css';
+@import './styles.css';
+
+body, html {
+  margin:0;
+  padding:0;
+  background-color: var(--surface-b);
+  font-family: var(--font-family);
+  font-weight: 400;
+  color: var(--text-color);
+  -webkit-font-smoothing: antialiased;
+}

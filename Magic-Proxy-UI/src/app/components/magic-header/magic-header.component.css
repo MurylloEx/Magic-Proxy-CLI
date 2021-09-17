@@ -1,0 +1,14 @@
+.mg-header-container {
+  height: 64px;
+  width: 100%;
+  background-color: var(--surface-a);
+  border-bottom: 1px solid var(--surface-d);
+}
+
+.mg-header-image {
+  top: 50%;
+  width: 48px;
+  height: 48px;
+  position: relative;
+  transform: translateY(-50%);
+}

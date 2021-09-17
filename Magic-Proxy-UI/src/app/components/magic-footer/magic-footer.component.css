@@ -1,0 +1,7 @@
+.mg-footer-container {
+  padding-bottom: 1rem;
+  min-height: 64px;
+  width: 100%;
+  background-color: var(--surface-a);
+  border-top: 1px solid var(--surface-d);
+}

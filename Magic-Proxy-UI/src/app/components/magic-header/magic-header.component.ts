@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-magic-header',
+  selector: 'magic-header',
   templateUrl: './magic-header.component.html',
   styleUrls: ['./magic-header.component.css']
 })

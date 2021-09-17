@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-magic-login',
+  selector: 'magic-login',
   templateUrl: './magic-login.component.html',
   styleUrls: ['./magic-login.component.css']
 })

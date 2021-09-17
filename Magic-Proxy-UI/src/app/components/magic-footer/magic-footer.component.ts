@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-magic-footer',
+  selector: 'magic-footer',
   templateUrl: './magic-footer.component.html',
   styleUrls: ['./magic-footer.component.css']
 })

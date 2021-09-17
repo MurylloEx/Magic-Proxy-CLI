@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-magic-section',
+  selector: 'magic-section',
   templateUrl: './magic-section.component.html',
   styleUrls: ['./magic-section.component.css']
 })

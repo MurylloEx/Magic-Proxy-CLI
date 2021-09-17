@@ -1,1 +1,52 @@
-<p>magic-login works!</p>
+<div class="p-shadow-3 mg-local-login-max-width">
+  <p-card>
+    <ng-template pTemplate="header">
+      
+      <div class="p-text-center p-mt-2 p-pt-4 p-pr-2 p-pl-2">
+        <strong 
+          class="mg-local-font-header" 
+          style="color: var(--pink-500)">
+          <i class="pi pi-lock"></i> Unauthorized
+        </strong>
+      </div>
+  
+    </ng-template>
+  
+    <div class="p-inputgroup p-mb-4 p-mt-1">
+      <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+      <span class="p-float-label">
+        <input type="name" pInputText id="user-name">
+        <label for="user-name">Username</label>
+      </span>
+    </div>
+  
+    <div class="p-inputgroup p-mt-1">
+      <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
+      <span class="p-float-label">
+        <input type="text" pInputText id="user-token">
+        <label for="user-token">Security Token</label>
+      </span>
+    </div>
+  
+    <ng-template pTemplate="footer">
+  
+      <div class="p-grid">
+        <div class="p-col-12 p-xl-3 p-lg-3 p-md-3"></div>
+
+        <div class="p-col-12 p-xl-6 p-lg-6 p-md-6">
+          <button 
+            pRipple 
+            pButton 
+            label="Unlock access" 
+            icon="pi pi-sign-in" 
+            class="p-button-secondary mg-style-full-width"
+            (click)="doLogin()">
+          </button>
+        </div>
+
+        <div class="p-col-12 p-xl-3 p-lg-3 p-md-3"></div>
+      </div>
+  
+    </ng-template>
+  </p-card>
+</div>
