@@ -1,1 +1,10 @@
-<p>magic-section works!</p>
+<div class="mg-local-section p-shadow-4">
+  <div class="mg-local-title">
+    <strong>
+      <i [class]="'pi p-mr-1 ' + mgIcon"></i>
+      {{mgTitle}}
+    </strong>
+  </div>
+  <div class="p-mt-2"></div>
+  <ng-content></ng-content>
+</div>

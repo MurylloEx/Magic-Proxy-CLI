@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'magic-section',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./magic-section.component.css']
 })
 export class MagicSectionComponent implements OnInit {
+
+  @Input() mgTitle: string = "";
+  @Input() mgIcon: string = "";
 
   constructor() { }
 
