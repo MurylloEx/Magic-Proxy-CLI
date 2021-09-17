@@ -7,13 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MagicPanelComponent implements OnInit {
 
+  m_SectionNumber: number = 1;
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  doClick(event){
-    console.log(event)
+  onSectionChange(index: number){
+    this.m_SectionNumber = index;
   }
 
 }

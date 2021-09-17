@@ -1,4 +1,9 @@
 .mg-footer-container {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  margin-bottom: 0px;
   padding-bottom: 1rem;
   min-height: 64px;
   width: 100%;

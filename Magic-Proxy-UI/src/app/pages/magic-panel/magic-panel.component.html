@@ -9,7 +9,7 @@
 
         <div class="p-mr-1">
           <magic-widget 
-            (click)="doClick($event)" 
+            (click)="onSectionChange(1)" 
             mgIcon="pi-sitemap"
             mgTitle="Proxy settings">
           </magic-widget>
@@ -17,7 +17,7 @@
         
         <div class="p-ml-1 p-mr-1">
           <magic-widget 
-            (click)="doClick($event)" 
+            (click)="onSectionChange(2)" 
             mgIcon="pi-shield"
             mgTitle="Security settings">
           </magic-widget>
@@ -25,7 +25,7 @@
         
         <div class="p-ml-1 p-mr-1">
           <magic-widget 
-            (click)="doClick($event)" 
+            (click)="onSectionChange(3)" 
             mgIcon="pi-users"
             mgTitle="Users settings">
           </magic-widget>
@@ -33,7 +33,7 @@
         
         <div class="p-ml-1">
           <magic-widget 
-            (click)="doClick($event)" 
+            (click)="onSectionChange(4)" 
             mgIcon="pi-cog"
             mgTitle="Preferences">
           </magic-widget>
@@ -50,9 +50,10 @@
     <div class="p-col-12 p-xl-3 p-lg-3 p-md-2 p-sm-12">
     </div>
     <div class="p-col-12 p-xl-6 p-lg-6 p-md-8 p-sm-12">
-      <magic-section mgIcon="pi-sitemap" mgTitle="Proxy settings">
-        
-      </magic-section>
+      <magic-proxy *ngIf="m_SectionNumber == 1"></magic-proxy>
+      <magic-security *ngIf="m_SectionNumber == 2"></magic-security>
+      <magic-users *ngIf="m_SectionNumber == 3"></magic-users>
+      <magic-preference *ngIf="m_SectionNumber == 4"></magic-preference>
     </div>
     <div class="p-col-12 p-xl-3 p-lg-3 p-md-2 p-sm-12">
     </div>

@@ -1,0 +1,69 @@
+<div class="mg-local-proxy-container p-mb-3">
+  <div class="p-inputgroup p-mt-5">
+    <span class="p-inputgroup-addon"><i class="pi pi-globe"></i></span>
+    <span class="p-float-label">
+      <input type="text" pInputText id="domain-name">
+      <label for="domain-name">Domain name</label>
+    </span>
+  </div>
+
+  <div class="p-inputgroup p-mt-4">
+    <span class="p-inputgroup-addon"><i class="pi pi-clock"></i></span>
+    <span class="p-float-label">
+      <input type="text" pInputText id="timeout">
+      <label for="timeout">Timeout (ms)</label>
+    </span>
+  </div>
+
+  <div class="p-mt-4">
+    <p-toggleButton 
+      styleClass="p-button-danger"
+      [onLabel]="'This proxy is defined as default proxy'" 
+      [offLabel]="'This proxy is not a default proxy'" 
+      [onIcon]="'pi pi-check'" 
+      [offIcon]="'pi pi-times'" 
+      [styleClass]="'mg-style-full-width'">
+    </p-toggleButton>
+  </div>
+
+  <div class="p-grid p-mt-2">
+    <div class="p-col-12 p-lg-6">
+      <button 
+        (click)="httpPanel.toggle($event)"
+        pRipple
+        pButton
+        icon="pi pi-reply"
+        label="HTTP/HTTPS"
+        pTooltip="Set HTTP/HTTPS destinations"
+        tooltipPosition="top"
+        class="mg-style-full-width p-button-info p-button-outlined p-button-rounded">
+      </button>
+    </div>    
+    
+    <div class="p-col-12 p-lg-6">
+      <button 
+        (click)="websockPanel.toggle($event)"
+        pRipple
+        pButton
+        icon="pi pi-reply"
+        label="WS/WSS"
+        pTooltip="Set WS/WSS destinations"
+        tooltipPosition="top"
+        class="mg-style-full-width p-button-danger p-button-outlined p-button-rounded">
+      </button>
+    </div>
+  
+    <p-overlayPanel #httpPanel [showCloseIcon]="true" [style]="{width: '450px'}">
+      <ng-template pTemplate>
+        <magic-proxy-destination></magic-proxy-destination>
+      </ng-template>
+    </p-overlayPanel>
+
+    <p-overlayPanel #websockPanel [showCloseIcon]="true" [style]="{width: '450px'}">
+      <ng-template pTemplate>
+        <magic-proxy-destination></magic-proxy-destination>
+      </ng-template>
+    </p-overlayPanel>
+  </div>
+
+</div>
