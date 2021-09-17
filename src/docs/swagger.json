@@ -1,0 +1,145 @@
+{
+  "path": "docs",
+  "title": "Magic Proxy Documentation",
+  "description": "This page describes how to use all endpoints of Magic Proxy.",
+  "version": "1.0",
+  "tag": "proxy, docs, api",
+
+  "models": {
+    "proxy": {
+      "fields": {
+        "id": {
+          "example": "49023b74-3ffd-4860-8341-627386324b23",
+          "description": "Represents a object as unique way."
+        },
+        "timestamp": {
+          "example": 1631829799590,
+          "description": "A timestamp that can be used to register when the object was created."
+        },
+        "isDefault": {
+          "example": false,
+          "description": "A boolean flag that represents if proxy is default or not."
+        },
+        "domain": {
+          "example": "www.muryllo.com.br",
+          "description": "The domain name."
+        },
+        "timeout": {
+          "example": 10000,
+          "description": "The TTL or TIMEOUT "
+        },
+        "round": {
+          "example": 0,
+          "description": "The index zero-based of destination to be used first. It's used in round robin balancing."
+        },
+        "destinations": {
+          "example": "http://192.168.0.100:5555/",
+          "description": "The destination of proxy entry (supports both http and https)."
+        },
+        "websockDestinations": {
+          "example": "ws://192.168.0.100:5555/",
+          "description": "The destination of proxy entry (supports both ws and wss)."
+        }
+      }
+    },
+    "settings": {
+      "fields": {
+        "id": {
+          "example": "49023b74-3ffd-4860-8341-627386324b23",
+          "description": "Represents a object as unique way."
+        },
+        "timestamp": {
+          "example": 1631829799590,
+          "description": "A timestamp that can be used to register when the object was created."
+        },
+        "allowUnknownHost": {
+          "example": true,
+          "description": "A boolean flag that specify if Magic Proxy should allow requests from unknown hosts or domains."
+        },
+        "allowWebsockets": {
+          "example": true,
+          "description": "A boolean flag that specify if Magic Proxy should allow websockets forward and proxy. It's disabled by default."
+        },
+        "httpEnabled": {
+          "example": true,
+          "description": "A boolean flag that specify if Magic Proxy should allow requests from unencrypted HTTP protocol."
+        },
+        "httpsEnabled": {
+          "example": false,
+          "description": "A boolean flag that specify if Magic Proxy should allow requests from encrypted HTTPS protocol. Disabled by default"
+        },
+        "httpPort": {
+          "example": 80,
+          "description": "The HTTP port to be used by Magic Proxy."
+        },
+        "httpsPort": {
+          "example": 443,
+          "description": "The HTTPS port to be used by Magic Proxy."
+        },
+        "hstsEnabled": {
+          "example": true,
+          "description": "A boolean flag that specify if Magic Proxy should redirect and force requests to use encrypted protocol (HTTPS)."
+        }
+      }
+    },
+    "tls": {
+      "fields": {
+        "id": {
+          "example": "49023b74-3ffd-4860-8341-627386324b23",
+          "description": "Represents a object as unique way."
+        },
+        "timestamp": {
+          "example": 1631829799590,
+          "description": "A timestamp that can be used to register when the object was created."
+        },
+        "certificate": {
+          "example": "---BEGIN CERTIFICATE--- (...)",
+          "description": "The content of certificate in .pem format."
+        },
+        "privateKey": {
+          "example": "---BEGIN RSA PRIVATE KEY--- (...)",
+          "description": "The content of RSA private key in .pem format."
+        }
+      }
+    },
+    "user": {
+      "fields": {
+        "id": {
+          "example": "49023b74-3ffd-4860-8341-627386324b23",
+          "description": "Represents a object as unique way."
+        },
+        "timestamp": {
+          "example": 1631829799590,
+          "description": "A timestamp that can be used to register when the object was created."
+        },
+        "name": {
+          "example": "Muryllo",
+          "description": "A name of user that is used to log-in."
+        },
+        "token": {
+          "example": "24c2db74-3fdd-48a0-8471-52b386324b33",
+          "description": "A security token with UUID format."
+        },
+        "role": {
+          "example": 3,
+          "description": "A byte that define the user roles. Should be used with bit OR using int numbers that satisfy the condition: x = 2^n where n is a integer."
+        }
+      }
+    }
+  },
+
+  "datas": {
+    "login": {
+      "fields":{
+        "name": {
+          "example": "Muryllo",
+          "description": "A name of user that is used to log-in."
+        },
+        "token": {
+          "example": "24c2db74-3fdd-48a0-8471-52b386324b33",
+          "description": "A security token with UUID format."
+        }
+      }
+    }
+  }
+}
