@@ -20,7 +20,7 @@ export class UserModel extends BaseEntity {
   @MaxLength(64)
   @MinLength(4)
   @Matches(/[a-zA-Z0-9_\-@$!#.]+/m)
-  @Column()
+  @Column({ unique: true })
   public name?: string;
 
   @ApiProperty(models.user.fields.token)

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Put, UseFilters, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseFilters, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { HttpExceptionFilter } from 'src/filters/http-exception.filter';
 import { AuthorizeGuard } from 'src/security/guards/authorize.guard';
 import { Roles as KnownRoles } from 'src/security/roles.enum';
@@ -20,6 +20,12 @@ export class UsersController {
   @Roles(KnownRoles.Manager)
   public async getUsers(){
     return await this.usersService.findAll();
+  }
+
+  @Post()
+  @Roles(KnownRoles.Manager)
+  public async createUser(@Body() data: UserModel){
+    return await this.usersService.insert(data);
   }
 
   @Put(':id')

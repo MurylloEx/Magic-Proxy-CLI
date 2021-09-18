@@ -30,6 +30,10 @@ export class UsersService {
     return this.Users.merge(found, user);
   }
 
+  async insert(user: UserModel): Promise<UserModel> {
+    return await this.Users.save(user);
+  }
+
   async remove(id: string): Promise<void> {
     await this.Users.delete(id);
   }
