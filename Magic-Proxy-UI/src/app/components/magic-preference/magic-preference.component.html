@@ -1,3 +1,77 @@
 <magic-section mgIcon="pi-cog" mgTitle="Preferences">
   
+  <div class="p-grid p-jc-center p-mr-auto p-ml-auto p-mt-3">
+    
+    <p-toggleButton 
+      styleClass="p-mb-2 p-mr-1 p-ml-1"
+      [(ngModel)]="m_AllowUnknownHosts" 
+      [onIcon]="'pi pi-check'" 
+      [offIcon]="'pi pi-times'"
+      [onLabel]="'Unknown Host Allowed'"
+      [offLabel]="'Unknown Host Disallowed'">
+    </p-toggleButton>
+  
+    <p-toggleButton 
+      styleClass="p-mb-2 p-mr-1 p-ml-1"
+      [(ngModel)]="m_AllowWebsockets" 
+      [onIcon]="'pi pi-check'" 
+      [offIcon]="'pi pi-times'"
+      [onLabel]="'WebSockets Allowed'"
+      [offLabel]="'WebSockets Disallowed'">
+    </p-toggleButton>
+  
+    <p-toggleButton 
+      styleClass="p-mb-2 p-mr-1 p-ml-1"
+      [(ngModel)]="m_HttpEnabled" 
+      [onIcon]="'pi pi-check'" 
+      [offIcon]="'pi pi-times'"
+      [onLabel]="'HTTP Enabled'"
+      [offLabel]="'HTTP Disabled'">
+    </p-toggleButton>
+  
+    <p-toggleButton 
+      styleClass="p-mb-2 p-mr-1 p-ml-1"
+      [(ngModel)]="m_HttpsEnabled" 
+      [onIcon]="'pi pi-check'" 
+      [offIcon]="'pi pi-times'"
+      [onLabel]="'HTTPS Enabled'"
+      [offLabel]="'HTTPS Disabled'">
+    </p-toggleButton>
+  
+    <p-toggleButton 
+      styleClass="p-mb-2 p-mr-1 p-ml-1"
+      [(ngModel)]="m_HstsEnabled" 
+      [onIcon]="'pi pi-check'" 
+      [offIcon]="'pi pi-times'"
+      [onLabel]="'HSTS Enabled'"
+      [offLabel]="'HSTS Disabled'">
+    </p-toggleButton>
+
+  </div>
+
+  <div class="p-inputgroup p-mt-2">
+    <span class="p-inputgroup-addon"><i class="pi pi-angle-right"></i></span>
+    <span class="p-float-label">
+      <input type="text" pInputText id="timeout">
+      <label for="timeout">Port (Http)</label>
+    </span>
+  </div>
+
+  <div class="p-inputgroup p-mt-4">
+    <span class="p-inputgroup-addon"><i class="pi pi-angle-right"></i></span>
+    <span class="p-float-label">
+      <input type="text" pInputText id="timeout">
+      <label for="timeout">Port (Https)</label>
+    </span>
+  </div>
+
+  <div class="p-text-center p-mt-4">
+    <button
+      pRipple
+      pButton
+      class="p-button-success p-button-outlined p-button-rounded"
+      label="Apply changes">
+    </button>
+  </div>
+
 </magic-section>
