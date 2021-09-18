@@ -1,6 +1,9 @@
 <magic-section mgIcon="pi-sitemap" mgTitle="Proxy settings">
 
-  <div *ngFor="let proxy of [1]">
+  <magic-proxy-entry></magic-proxy-entry>
+  <div class="p-mb-3"></div>
+  
+  <div *ngFor="let proxy of m_Proxies">
     <magic-proxy-entry></magic-proxy-entry>
     <div class="p-mb-3"></div>
   </div>

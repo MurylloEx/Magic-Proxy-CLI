@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MagicProxyComponent implements OnInit {
 
+  m_Proxies: any[] = [];
+
   constructor() { }
 
   ngOnInit(): void {

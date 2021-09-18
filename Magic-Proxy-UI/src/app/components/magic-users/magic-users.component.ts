@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MagicUsersComponent implements OnInit {
 
+  m_Users: any[] = [];
+  m_SelectedUser: any;
+
   constructor() { }
 
   ngOnInit(): void {

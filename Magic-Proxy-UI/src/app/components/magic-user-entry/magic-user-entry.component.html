@@ -1,0 +1,44 @@
+<div class="mg-local-user-container">
+  
+  <div class="p-inputgroup p-mt-4">
+    <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+    <span class="p-float-label">
+      <input type="text" pInputText id="timeout">
+      <label for="timeout">Username</label>
+    </span>
+  </div>
+
+  <div class="p-inputgroup p-mt-4">
+    <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
+    <span class="p-float-label">
+      <input type="text" pInputText id="timeout">
+      <label for="timeout">Security Token</label>
+    </span>
+  </div>
+
+  <div class="p-inputgroup p-mt-4">
+    <span class="p-inputgroup-addon"><i class="pi pi-unlock"></i></span>
+    <span class="p-float-label">
+      <input type="text" pInputText id="role">
+      <label for="role">Role</label>
+    </span>
+  </div>
+
+  <div class="p-grid p-jc-center p-mr-auto p-ml-auto p-mt-4">
+    <button 
+      (click)="onAdd($event)"
+      pRipple
+      pButton
+      icon="pi pi-check"
+      class="p-button-success p-button-outlined p-button-rounded p-ml-1 p-mr-1">
+    </button>
+    <button 
+      (click)="onRemove($event)"
+      pRipple
+      pButton
+      icon="pi pi-trash"
+      class="p-button-danger p-button-outlined p-button-rounded p-ml-1">
+    </button>
+  </div>
+
+</div>

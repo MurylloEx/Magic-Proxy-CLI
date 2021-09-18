@@ -1,3 +1,10 @@
 <magic-section mgIcon="pi-users" mgTitle="Users settings">
-  
+
+  <magic-user-entry></magic-user-entry>
+  <div class="p-mb-3"></div>
+
+  <div *ngFor="let user of m_Users; let i = index">
+    <magic-user-entry></magic-user-entry>
+    <div class="p-mb-3"></div>
+  </div>
 </magic-section>
