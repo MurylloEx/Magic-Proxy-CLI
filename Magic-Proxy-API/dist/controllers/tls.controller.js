@@ -89,7 +89,7 @@ TlsController = __decorate([
     (0, common_1.Controller)('tls'),
     (0, common_1.UseGuards)(authorize_guard_1.AuthorizeGuard),
     (0, common_1.UseFilters)(http_exception_filter_1.HttpExceptionFilter),
-    (0, common_1.UsePipes)(common_1.ValidationPipe),
+    (0, common_1.UsePipes)(new common_1.ValidationPipe({ transform: true })),
     (0, swagger_1.ApiBearerAuth)(),
     __metadata("design:paramtypes", [tls_service_1.TlsService,
         magic_proxy_service_1.MagicProxyService,

@@ -48,6 +48,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiProperty)(swagger_json_1.models.tls.fields.certificate),
     (0, class_validator_1.IsDefined)(),
+    (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.MaxLength)(131072),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
@@ -55,6 +56,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiProperty)(swagger_json_1.models.tls.fields.privateKey),
     (0, class_validator_1.IsDefined)(),
+    (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.MaxLength)(131072),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)

@@ -7,7 +7,7 @@ import { UsersService } from 'src/services/users.service';
 
 @Controller('auth')
 @UseFilters(HttpExceptionFilter)
-@UsePipes(ValidationPipe)
+@UsePipes(new ValidationPipe({ transform: true }))
 export class AuthController {
 
   constructor(

@@ -99,7 +99,7 @@ UsersController = __decorate([
     (0, common_1.Controller)('users'),
     (0, common_1.UseGuards)(authorize_guard_1.AuthorizeGuard),
     (0, common_1.UseFilters)(http_exception_filter_1.HttpExceptionFilter),
-    (0, common_1.UsePipes)(common_1.ValidationPipe),
+    (0, common_1.UsePipes)(new common_1.ValidationPipe({ transform: true })),
     (0, swagger_1.ApiBearerAuth)(),
     __metadata("design:paramtypes", [users_service_1.UsersService,
         response_service_1.ResponseService])

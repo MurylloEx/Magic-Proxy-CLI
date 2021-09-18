@@ -35,6 +35,8 @@ import { MagicPreferenceComponent } from './components/magic-preference/magic-pr
 import { MagicProxyEntryComponent } from './components/magic-proxy-entry/magic-proxy-entry.component';
 import { MagicProxyDestinationComponent } from './components/magic-proxy-destination/magic-proxy-destination.component';
 import { HttpClientModule } from '@angular/common/http';
+import { JwtAuthInterceptorService } from './hooks/jwt-auth.interceptor';
+import { ExpirationInterceptorService } from './hooks/expiration.interceptor';
 
 @NgModule({
   declarations: [
@@ -73,7 +75,11 @@ import { HttpClientModule } from '@angular/common/http';
     ToastModule,
     CardModule
   ],
-  providers: [MessageService],
+  providers: [
+    MessageService,
+    JwtAuthInterceptorService,
+    ExpirationInterceptorService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -12,7 +12,7 @@ import { ResponseService } from 'src/services/response.service';
 @Controller('tls')
 @UseGuards(AuthorizeGuard)
 @UseFilters(HttpExceptionFilter)
-@UsePipes(ValidationPipe)
+@UsePipes(new ValidationPipe({ transform: true }))
 @ApiBearerAuth()
 export class TlsController {
 
