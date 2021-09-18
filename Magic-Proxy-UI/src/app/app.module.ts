@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CardModule } from 'primeng/card';
 import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { TooltipModule } from 'primeng/tooltip';
@@ -33,6 +34,7 @@ import { MagicUserEntryComponent } from './components/magic-user-entry/magic-use
 import { MagicPreferenceComponent } from './components/magic-preference/magic-preference.component';
 import { MagicProxyEntryComponent } from './components/magic-proxy-entry/magic-proxy-entry.component';
 import { MagicProxyDestinationComponent } from './components/magic-proxy-destination/magic-proxy-destination.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,7 @@ import { MagicProxyDestinationComponent } from './components/magic-proxy-destina
     ToggleButtonModule,
     OverlayPanelModule,
     InputSwitchModule,
+    HttpClientModule,
     AppRoutingModule,
     InputTextModule,
     DropdownModule,
@@ -70,7 +73,7 @@ import { MagicProxyDestinationComponent } from './components/magic-proxy-destina
     ToastModule,
     CardModule
   ],
-  providers: [],
+  providers: [MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

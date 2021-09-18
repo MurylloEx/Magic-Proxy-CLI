@@ -9,7 +9,7 @@ export class NotificationService {
   constructor(private messageService: MessageService) { }
 
   notify(obj: Message){
-    this.messageService.add(obj);
+    setTimeout(() => this.messageService.add(obj), 350);
   }
 
   error() {

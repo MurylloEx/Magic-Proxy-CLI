@@ -15,7 +15,12 @@
     <div class="p-inputgroup p-mb-4 p-mt-1">
       <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
       <span class="p-float-label">
-        <input type="name" pInputText id="user-name">
+        <input 
+          type="name" 
+          pInputText 
+          id="user-name" 
+          [(ngModel)]="value.name"
+          (ngModelChange)="emitChanges()">
         <label for="user-name">Username</label>
       </span>
     </div>
@@ -23,7 +28,12 @@
     <div class="p-inputgroup p-mt-1">
       <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
       <span class="p-float-label">
-        <input type="text" pInputText id="user-token">
+        <input 
+          type="text" 
+          pInputText 
+          id="user-token" 
+          [(ngModel)]="value.token"
+          (ngModelChange)="emitChanges()">
         <label for="user-token">Security Token</label>
       </span>
     </div>
@@ -40,7 +50,6 @@
             label="Unlock access" 
             icon="pi pi-sign-in" 
             class="p-button-secondary mg-style-full-width"
-            routerLink="/panel"
             (click)="doLogin()">
           </button>
         </div>
