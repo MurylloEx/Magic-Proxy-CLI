@@ -1,18 +1,20 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { CardModule } from 'primeng/card';
+import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { TooltipModule } from 'primeng/tooltip';
+import { MessageModule } from 'primeng/message';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { ToggleButtonModule } from 'primeng/togglebutton';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -27,10 +29,10 @@ import { MagicFooterComponent } from './components/magic-footer/magic-footer.com
 import { MagicWidgetComponent } from './components/magic-widget/magic-widget.component';
 import { MagicSectionComponent } from './components/magic-section/magic-section.component';
 import { MagicSecurityComponent } from './components/magic-security/magic-security.component';
+import { MagicUserEntryComponent } from './components/magic-user-entry/magic-user-entry.component';
 import { MagicPreferenceComponent } from './components/magic-preference/magic-preference.component';
 import { MagicProxyEntryComponent } from './components/magic-proxy-entry/magic-proxy-entry.component';
 import { MagicProxyDestinationComponent } from './components/magic-proxy-destination/magic-proxy-destination.component';
-import { MagicUserEntryComponent } from './components/magic-user-entry/magic-user-entry.component';
 
 @NgModule({
   declarations: [
@@ -45,10 +47,10 @@ import { MagicUserEntryComponent } from './components/magic-user-entry/magic-use
     MagicWidgetComponent,
     MagicSectionComponent,
     MagicSecurityComponent,
+    MagicUserEntryComponent,
     MagicPreferenceComponent,
     MagicProxyEntryComponent,
-    MagicProxyDestinationComponent,
-    MagicUserEntryComponent
+    MagicProxyDestinationComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -60,10 +62,12 @@ import { MagicUserEntryComponent } from './components/magic-user-entry/magic-use
     InputTextModule,
     DropdownModule,
     TooltipModule,
+    MessageModule,
     BrowserModule,
     RippleModule,
     ButtonModule,
     FormsModule,
+    ToastModule,
     CardModule
   ],
   providers: [],
