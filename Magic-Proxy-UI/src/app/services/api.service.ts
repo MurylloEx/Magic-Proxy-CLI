@@ -27,9 +27,9 @@ export class ApiService {
       { ...HttpService.AuthHeader, ...HttpService.JsonHeader });
   }
 
-  updateProxy(data: any) {
+  updateProxy(id: string, data: any) {
     return this.http.put(
-      this.getApiBase() + "/proxy", data,
+      this.getApiBase() + "/proxy/" + encodeURIComponent(id), data,
       { ...HttpService.AuthHeader, ...HttpService.JsonHeader });
   }
 
@@ -47,7 +47,7 @@ export class ApiService {
 
   createSettings(data: any) {
     return this.http.post(
-      this.getApiBase() + "/settings",
+      this.getApiBase() + "/settings", data ,
       { ...HttpService.AuthHeader, ...HttpService.JsonHeader });
   }
 
@@ -69,9 +69,9 @@ export class ApiService {
       { ...HttpService.AuthHeader, ...HttpService.JsonHeader });
   }
 
-  updateTls(data: any) {
+  updateTls(id: string, data: any) {
     return this.http.put(
-      this.getApiBase() + "/tls", data,
+      this.getApiBase() + "/tls/" + encodeURIComponent(id), data,
       { ...HttpService.AuthHeader, ...HttpService.JsonHeader });
   }
 
@@ -93,9 +93,9 @@ export class ApiService {
       { ...HttpService.AuthHeader, ...HttpService.JsonHeader });
   }
 
-  updateUser(data: any) {
+  updateUser(id: string, data: any) {
     return this.http.put(
-      this.getApiBase() + "/users", data,
+      this.getApiBase() + "/users/" + encodeURIComponent(id), data,
       { ...HttpService.AuthHeader, ...HttpService.JsonHeader });
   }
 

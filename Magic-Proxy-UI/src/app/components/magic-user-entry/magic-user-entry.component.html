@@ -3,7 +3,7 @@
   <div class="p-inputgroup p-mt-4">
     <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
     <span class="p-float-label">
-      <input type="text" pInputText id="timeout">
+      <input type="text" pInputText id="timeout" [(ngModel)]="mgUser.name">
       <label for="timeout">Username</label>
     </span>
   </div>
@@ -11,7 +11,7 @@
   <div class="p-inputgroup p-mt-4">
     <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
     <span class="p-float-label">
-      <input type="text" pInputText id="timeout">
+      <input type="text" pInputText id="timeout" [(ngModel)]="mgUser.token">
       <label for="timeout">Security Token</label>
     </span>
   </div>
@@ -19,20 +19,21 @@
   <div class="p-inputgroup p-mt-4">
     <span class="p-inputgroup-addon"><i class="pi pi-unlock"></i></span>
     <span class="p-float-label">
-      <input type="text" pInputText id="role">
+      <input type="text" pInputText id="role" [(ngModel)]="mgUser.role">
       <label for="role">Role</label>
     </span>
   </div>
 
   <div class="p-grid p-jc-center p-mr-auto p-ml-auto p-mt-4">
     <button 
-      (click)="onAdd($event)"
+      (click)="onSave($event)"
       pRipple
       pButton
       icon="pi pi-check"
       class="p-button-success p-button-outlined p-button-rounded p-ml-1 p-mr-1">
     </button>
     <button 
+      *ngIf="!mgIsCreating"
       (click)="onRemove($event)"
       pRipple
       pButton

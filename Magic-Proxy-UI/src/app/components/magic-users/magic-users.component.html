@@ -1,10 +1,19 @@
 <magic-section mgIcon="pi-users" mgTitle="Users settings">
 
-  <magic-user-entry></magic-user-entry>
+  <magic-user-entry 
+    [mgIsCreating]="true" 
+    (mgUserCreated)="onUserCreated($event)">
+  </magic-user-entry>
   <div class="p-mb-3"></div>
 
   <div *ngFor="let user of m_Users; let i = index">
-    <magic-user-entry></magic-user-entry>
+    <magic-user-entry 
+      *ngIf="!user.deleted" 
+      [mgIsCreating]="false" 
+      [mgUser]="user"
+      (mgUserDeleted)="onUserDeleted($event)"
+      (mgUserUpdated)="onUserUpdated($event)">
+    </magic-user-entry>
     <div class="p-mb-3"></div>
   </div>
 </magic-section>

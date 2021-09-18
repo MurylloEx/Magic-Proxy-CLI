@@ -4,7 +4,7 @@
     
     <p-toggleButton 
       styleClass="p-mb-2 p-mr-1 p-ml-1"
-      [(ngModel)]="m_AllowUnknownHosts" 
+      [(ngModel)]="m_Settings.allowUnknownHost" 
       [onIcon]="'pi pi-check'" 
       [offIcon]="'pi pi-times'"
       [onLabel]="'Unknown Host Allowed'"
@@ -13,7 +13,7 @@
   
     <p-toggleButton 
       styleClass="p-mb-2 p-mr-1 p-ml-1"
-      [(ngModel)]="m_AllowWebsockets" 
+      [(ngModel)]="m_Settings.allowWebsockets" 
       [onIcon]="'pi pi-check'" 
       [offIcon]="'pi pi-times'"
       [onLabel]="'WebSockets Allowed'"
@@ -22,7 +22,7 @@
   
     <p-toggleButton 
       styleClass="p-mb-2 p-mr-1 p-ml-1"
-      [(ngModel)]="m_HttpEnabled" 
+      [(ngModel)]="m_Settings.httpEnabled" 
       [onIcon]="'pi pi-check'" 
       [offIcon]="'pi pi-times'"
       [onLabel]="'HTTP Enabled'"
@@ -31,7 +31,7 @@
   
     <p-toggleButton 
       styleClass="p-mb-2 p-mr-1 p-ml-1"
-      [(ngModel)]="m_HttpsEnabled" 
+      [(ngModel)]="m_Settings.httpsEnabled" 
       [onIcon]="'pi pi-check'" 
       [offIcon]="'pi pi-times'"
       [onLabel]="'HTTPS Enabled'"
@@ -40,7 +40,7 @@
   
     <p-toggleButton 
       styleClass="p-mb-2 p-mr-1 p-ml-1"
-      [(ngModel)]="m_HstsEnabled" 
+      [(ngModel)]="m_Settings.hstsEnabled" 
       [onIcon]="'pi pi-check'" 
       [offIcon]="'pi pi-times'"
       [onLabel]="'HSTS Enabled'"
@@ -52,21 +52,22 @@
   <div class="p-inputgroup p-mt-2">
     <span class="p-inputgroup-addon"><i class="pi pi-angle-right"></i></span>
     <span class="p-float-label">
-      <input type="text" pInputText id="timeout">
-      <label for="timeout">Port (Http)</label>
+      <input type="text" pInputText id="httpPort" [(ngModel)]="m_Settings.httpPort">
+      <label for="httpPort">Port (Http)</label>
     </span>
   </div>
 
   <div class="p-inputgroup p-mt-4">
     <span class="p-inputgroup-addon"><i class="pi pi-angle-right"></i></span>
     <span class="p-float-label">
-      <input type="text" pInputText id="timeout">
-      <label for="timeout">Port (Https)</label>
+      <input type="text" pInputText id="httpsPort" [(ngModel)]="m_Settings.httpsPort">
+      <label for="httpsPort">Port (Https)</label>
     </span>
   </div>
 
   <div class="p-text-center p-mt-4">
     <button
+      (click)="onSavePreferences($event)"
       pRipple
       pButton
       class="p-button-success p-button-outlined p-button-rounded"

@@ -50,7 +50,7 @@ export class SessionService {
       Role,
       Extra,
       Authenticated: true, 
-      Expire: (+new Date) + (Expiration || 72 * 10 ** 5) //2 Horas (Padrão)
+      Expire: (+new Date) + (Expiration || 24 * 36 * 10 ** 5) //24 Horas (Padrão)
     });
     this.runSessionCountdown();
     return this;
