@@ -1,16 +1,16 @@
 <div class="p-pt-2">
 
-  <div *ngIf="m_Destinations.length > 0">
-    <div class="p-inputgroup p-mt-4" *ngFor="let dest of m_Destinations">
+  <div *ngIf="mgDestinations.length > 0">
+    <div class="p-inputgroup p-mt-4" *ngFor="let dest of mgDestinations; let i = index; trackBy: trackByFn">
       <span class="p-inputgroup-addon"><i class="pi pi-reply"></i></span>
       <span class="p-float-label">
-        <input type="text" pInputText id="destination">
+        <input type="text" pInputText [id]="'destination' + i" [(ngModel)]="mgDestinations[i]">
         <label for="destination">Destination ({{mgDestinationType}})</label>
       </span>
     </div>
   </div>
 
-  <div *ngIf="m_Destinations.length == 0" class="p-text-center">
+  <div *ngIf="mgDestinations.length == 0" class="p-text-center">
     <strong>No destinations found ({{mgDestinationType}})</strong>
   </div>
 

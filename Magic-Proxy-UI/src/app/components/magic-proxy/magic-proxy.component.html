@@ -1,20 +1,20 @@
 <magic-section mgIcon="pi-sitemap" mgTitle="Proxy settings">
 
-  <magic-proxy-entry></magic-proxy-entry>
+  <magic-proxy-entry 
+    [mgIsCreating]="true" 
+    (mgProxyCreated)="onProxyCreated($event)"
+    [(mgProxy)]="m_NewProxy">
+  </magic-proxy-entry>
   <div class="p-mb-3"></div>
   
-  <div *ngFor="let proxy of m_Proxies">
-    <magic-proxy-entry></magic-proxy-entry>
+  <div *ngFor="let proxy of m_Proxies; let i = index">
+    <magic-proxy-entry 
+      [mgIsCreating]="false" 
+      (mgProxyDeleted)="onProxyDeleted($event)"
+      (mgProxyUpdated)="onProxyUpdated($event)"
+      [(mgProxy)]="m_Proxies[i]">
+    </magic-proxy-entry>
     <div class="p-mb-3"></div>
-  </div>
-
-  <div class="p-text-center">
-    <button
-      pRipple
-      pButton
-      class="p-button-success p-button-outlined p-button-rounded"
-      label="Apply changes">
-    </button>
   </div>
 
 </magic-section>

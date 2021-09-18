@@ -2,7 +2,11 @@
   <div class="p-inputgroup p-mt-5">
     <span class="p-inputgroup-addon"><i class="pi pi-globe"></i></span>
     <span class="p-float-label">
-      <input type="text" pInputText id="domain-name">
+      <input 
+        type="text" 
+        pInputText 
+        id="domain-name" 
+        [(ngModel)]="mgProxy.domain">
       <label for="domain-name">Domain name</label>
     </span>
   </div>
@@ -10,13 +14,18 @@
   <div class="p-inputgroup p-mt-4">
     <span class="p-inputgroup-addon"><i class="pi pi-clock"></i></span>
     <span class="p-float-label">
-      <input type="text" pInputText id="timeout">
+      <input 
+        type="text" 
+        pInputText 
+        id="timeout" 
+        [(ngModel)]="mgProxy.timeout">
       <label for="timeout">Timeout (ms)</label>
     </span>
   </div>
 
   <div class="p-mt-4">
     <p-toggleButton 
+      [(ngModel)]="mgProxy.isDefault"
       styleClass="p-button-danger"
       [onLabel]="'This proxy is defined as default proxy'" 
       [offLabel]="'This proxy is not a default proxy'" 
@@ -49,21 +58,48 @@
         label="WS/WSS"
         pTooltip="Set WS/WSS destinations"
         tooltipPosition="top"
-        class="mg-style-full-width p-button-danger p-button-outlined p-button-rounded">
+        class="mg-style-full-width p-button-help p-button-outlined p-button-rounded">
       </button>
     </div>
   
-    <p-overlayPanel #httpPanel [showCloseIcon]="true" [style]="{width: '450px'}">
+    <p-overlayPanel #httpPanel [showCloseIcon]="true" [style]="{width: '450px', 'max-width': '85vw'}">
       <ng-template pTemplate>
-        <magic-proxy-destination></magic-proxy-destination>
+        <magic-proxy-destination 
+          mgDestinationType="http/https" 
+          [(mgDestinations)]="mgProxy.destinations">
+        </magic-proxy-destination>
       </ng-template>
     </p-overlayPanel>
 
-    <p-overlayPanel #websockPanel [showCloseIcon]="true" [style]="{width: '450px'}">
+    <p-overlayPanel #websockPanel [showCloseIcon]="true" [style]="{width: '450px', 'max-width': '85vw'}">
       <ng-template pTemplate>
-        <magic-proxy-destination></magic-proxy-destination>
+        <magic-proxy-destination 
+          mgDestinationType="ws/wss" 
+          [(mgDestinations)]="mgProxy.websockDestinations">
+        </magic-proxy-destination>
       </ng-template>
     </p-overlayPanel>
   </div>
 
+  <div class="p-grid p-jc-center p-mr-auto p-ml-auto p-mt-4">
+    <button
+      (click)="onApplyChanges($event)"
+      pRipple
+      pButton
+      pTooltip="Apply changes"
+      tooltipPosition="bottom"
+      icon="pi pi-check"
+      class="p-button-success p-button-outlined p-button-rounded p-mr-1">
+    </button>
+    <button
+      *ngIf="!mgIsCreating"
+      (click)="onDeleteProxy($event)"
+      pRipple
+      pButton
+      pTooltip="Delete proxy"
+      tooltipPosition="bottom"
+      icon="pi pi-trash"
+      class="p-button-danger p-button-outlined p-button-rounded p-ml-1">
+    </button>
+  </div>
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'magic-proxy-destination',
@@ -8,8 +8,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class MagicProxyDestinationComponent implements OnInit {
 
   @Input() mgDestinationType: string = "http/https";
-
-  m_Destinations: string[] = [];
+  @Input() mgDestinations: string[] = [];
+  @Output() mgDestinationsChange: EventEmitter<string[]> = new EventEmitter<string[]>();
 
   constructor() { }
 
@@ -17,15 +17,22 @@ export class MagicProxyDestinationComponent implements OnInit {
   }
 
   onSave(event){
+    this.mgDestinationsChange.emit(this.mgDestinations);
     document.body.click();
   }
 
   onAdd(event){
-    this.m_Destinations.push("");
+    this.mgDestinations.push("");
+    this.mgDestinationsChange.emit(this.mgDestinations);
   }
 
   onRemove(event){
-    this.m_Destinations.splice(-1, 1);
+    this.mgDestinations.splice(-1, 1);
+    this.mgDestinationsChange.emit(this.mgDestinations);
+  }
+
+  trackByFn(index, item) {
+    return index;
   }
 
 }
