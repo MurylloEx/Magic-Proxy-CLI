@@ -1,5 +1,7 @@
+import { join } from 'path';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ServeStaticModule } from '@nestjs/serve-static';
 
 import { AuthModule } from './modules/auth.module';
 import { UsersModule } from './modules/users.module';
@@ -26,7 +28,10 @@ import { ResponseService } from './services/response.service';
     AuthModule,
     TypeOrmModule.forFeature([ProxyModel]),
     TypeOrmModule.forFeature([SettingsModel]),
-    TypeOrmModule.forFeature([TlsModel])
+    TypeOrmModule.forFeature([TlsModel]),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, 'assets')
+    })
   ],
   providers: [
     ProxyService,

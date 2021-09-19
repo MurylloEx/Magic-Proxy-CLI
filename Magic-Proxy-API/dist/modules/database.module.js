@@ -22,7 +22,7 @@ DatabaseModule = __decorate([
                 name: 'default',
                 type: 'sqlite',
                 database: 'database/db.sqlite',
-                logging: true,
+                logging: false,
                 synchronize: true,
                 entities: [
                     tls_model_1.TlsModel,

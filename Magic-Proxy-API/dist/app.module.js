@@ -7,8 +7,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
+const path_1 = require("path");
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
+const serve_static_1 = require("@nestjs/serve-static");
 const auth_module_1 = require("./modules/auth.module");
 const users_module_1 = require("./modules/users.module");
 const database_module_1 = require("./modules/database.module");
@@ -33,7 +35,10 @@ AppModule = __decorate([
             auth_module_1.AuthModule,
             typeorm_1.TypeOrmModule.forFeature([proxy_model_1.ProxyModel]),
             typeorm_1.TypeOrmModule.forFeature([settings_model_1.SettingsModel]),
-            typeorm_1.TypeOrmModule.forFeature([tls_model_1.TlsModel])
+            typeorm_1.TypeOrmModule.forFeature([tls_model_1.TlsModel]),
+            serve_static_1.ServeStaticModule.forRoot({
+                rootPath: (0, path_1.join)(__dirname, 'assets')
+            })
         ],
         providers: [
             proxy_service_1.ProxyService,

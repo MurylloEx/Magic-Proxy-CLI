@@ -11,7 +11,7 @@ import { UserModel } from 'src/models/user.model';
       name: 'default',
       type: 'sqlite',
       database: 'database/db.sqlite',
-      logging: true,
+      logging: false,
       synchronize: true,
       entities: [
         TlsModel,

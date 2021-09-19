@@ -6,7 +6,7 @@ import { HttpService } from './http.service';
 })
 export class ApiService {
 
-  private m_ApiAddress: string = "http://localhost:3000";
+  private m_ApiAddress: string = window.location.protocol + '//' + window.location.host;
   private m_ApiBase: string = "/v1/api";
 
   constructor(private http: HttpService) { }

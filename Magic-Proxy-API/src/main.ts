@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import { AppModule } from './app.module';
 import { NestFactory } from '@nestjs/core';
 import { INestApplication } from '@nestjs/common';

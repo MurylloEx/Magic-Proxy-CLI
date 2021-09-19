@@ -24,52 +24,87 @@ const magic_reverse_proxy_1 = require("magic-reverse-proxy");
 const proxy_service_1 = require("./proxy.service");
 const settings_service_1 = require("./settings.service");
 const tls_service_1 = require("./tls.service");
+const users_service_1 = require("./users.service");
+const uuid_1 = require("uuid");
+const user_model_1 = require("../models/user.model");
 let MagicProxyService = class MagicProxyService {
-    constructor(settingsService, tlsService, proxyService) {
+    constructor(settingsService, tlsService, proxyService, userService) {
         this.settingsService = settingsService;
         this.tlsService = tlsService;
         this.proxyService = proxyService;
+        this.userService = userService;
         this.m_IsRunning = false;
+    }
+    createAdmin() {
+        setTimeout(() => __awaiter(this, void 0, void 0, function* () {
+            const admin = new user_model_1.UserModel();
+            admin.name = 'admin';
+            admin.role = 1;
+            admin.token = (0, uuid_1.v4)();
+            console.log('[Info] This is the first time that you use Magic Proxy.');
+            console.log('[Info] A user will be created with a primary token that can be used to access all features.');
+            console.log('[Security] Creating the first user of Magic Proxy.');
+            console.log('[Security] Generating primary token for user #admin.');
+            console.log('[Security] Your security token is ' + admin.token + ' for user #admin.');
+            yield this.userService.insert(admin);
+        }), 5000);
+    }
+    onApplicationBootstrap() {
+        return __awaiter(this, void 0, void 0, function* () {
+            if ((yield this.userService.findAll()).length == 0) {
+                this.createAdmin();
+            }
+            yield this.reloadProxy();
+        });
     }
     reloadProxy() {
         return __awaiter(this, void 0, void 0, function* () {
-            if (!this.m_ProxyTrigger)
-                return;
-            this.unbindProxy();
-            let tls = yield this.tlsService.findLast();
-            let settings = yield this.settingsService.findLast();
-            let proxies = yield this.proxyService.findAll();
-            let [defaultProxy] = proxies.filter(v => !!v.isDefault);
-            this.m_ProxyTrigger = (0, magic_reverse_proxy_1.createProxy)({
-                enable_hsts: settings.hstsEnabled,
-                allow_unknown_host: settings.allowUnknownHost,
-                allow_websockets: settings.allowWebsockets,
-                http: {
-                    enabled: settings.httpEnabled,
-                    port: settings.httpPort
-                },
-                https: {
-                    enabled: settings.httpsEnabled,
-                    port: settings.httpsPort,
-                    sslkey: tls.privateKey,
-                    sslcert: tls.certificate
-                },
-                proxies: proxies.filter(v => !v.isDefault).map(v => {
-                    return {
-                        timeout: v.timeout,
-                        round: v.round,
-                        destination: v.destinations.split('//:!//'),
-                        sockDestination: v.websockDestinations.split('//:!//')
-                    };
-                }),
-                default_proxy: {
-                    timeout: defaultProxy.timeout,
-                    round: defaultProxy.round,
-                    destination: defaultProxy.destinations.split('//:!//'),
-                    sockDestination: defaultProxy.websockDestinations.split('//:!//')
-                }
-            });
-            this.bindProxy();
+            try {
+                this.unbindProxy();
+                let tls = yield this.tlsService.findLast();
+                let settings = yield this.settingsService.findLast();
+                let proxies = yield this.proxyService.findAll();
+                let [defaultProxy] = proxies.filter(v => !!v.isDefault);
+                console.log(tls, settings, proxies, defaultProxy);
+                this.m_ProxyTrigger = (0, magic_reverse_proxy_1.createProxy)({
+                    enable_hsts: settings.hstsEnabled,
+                    allow_unknown_host: settings.allowUnknownHost,
+                    allow_websockets: settings.allowWebsockets,
+                    http: {
+                        enabled: settings.httpEnabled,
+                        port: settings.httpPort,
+                        middlewares: [],
+                        start_callback: () => { }
+                    },
+                    https: {
+                        enabled: settings.httpsEnabled,
+                        port: settings.httpsPort,
+                        middlewares: [],
+                        sslkey: tls.privateKey,
+                        sslcert: tls.certificate,
+                        start_callback: () => { }
+                    },
+                    proxies: proxies.filter(v => !v.isDefault).map(v => {
+                        return {
+                            timeout: v.timeout,
+                            round: v.round,
+                            destination: v.destinations.split('//:!//'),
+                            sockDestination: v.websockDestinations.split('//:!//')
+                        };
+                    }),
+                    default_proxy: {
+                        timeout: defaultProxy.timeout,
+                        round: defaultProxy.round,
+                        destination: defaultProxy.destinations.split('//:!//'),
+                        sockDestination: defaultProxy.websockDestinations.split('//:!//')
+                    }
+                });
+                console.dir(this.m_ProxyTrigger);
+                this.bindProxy();
+            }
+            catch (e) {
+                console.log('[Warning] ' + e.message);
+            }
         });
     }
     buildProxy(options) {
@@ -98,7 +133,8 @@ MagicProxyService = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [settings_service_1.SettingsService,
         tls_service_1.TlsService,
-        proxy_service_1.ProxyService])
+        proxy_service_1.ProxyService,
+        users_service_1.UsersService])
 ], MagicProxyService);
 exports.MagicProxyService = MagicProxyService;
 //# sourceMappingURL=magic.proxy.service.js.map

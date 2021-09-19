@@ -1,11 +1,16 @@
 {
   "name": "magic-proxy-cli",
-  "version": "0.0.1",
-  "description": "",
+  "version": "0.0.14",
+  "description": "A reverse proxy based CLI that you can use to manage your webserver.",
   "author": "Muryllo Pimenta de Oliveira",
-  "private": true,
-  "type": "module",
   "license": "MIT",
+  "bin": {
+    "magicproxy": "./dist/main.js"
+  },
+  "main": "dist/main.js",
+  "directories": {
+    "assets": "./dist/**"
+  },
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
@@ -26,6 +31,7 @@
     "@nestjs/jwt": "^8.0.0",
     "@nestjs/passport": "^8.0.1",
     "@nestjs/platform-express": "^8.0.0",
+    "@nestjs/serve-static": "^2.2.2",
     "@nestjs/swagger": "^5.0.9",
     "@nestjs/typeorm": "^8.0.2",
     "class-transformer": "^0.4.0",
@@ -40,7 +46,8 @@
     "rxjs": "^7.2.0",
     "sqlite3": "^5.0.2",
     "swagger-ui-express": "^4.1.6",
-    "typeorm": "^0.2.37"
+    "typeorm": "^0.2.37",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
