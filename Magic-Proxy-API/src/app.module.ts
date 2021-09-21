@@ -20,6 +20,7 @@ import { ProxyController } from './controllers/proxy.controller';
 import { SettingsController } from './controllers/settings.controller';
 import { MagicProxyService } from './services/magic.proxy.service';
 import { ResponseService } from './services/response.service';
+import { AcmeService } from './services/acme.service';
 
 @Module({
   imports: [
@@ -38,7 +39,8 @@ import { ResponseService } from './services/response.service';
     SettingsService,
     TlsService,
     MagicProxyService,
-    ResponseService
+    ResponseService,
+    AcmeService
   ],
   controllers: [
     ProxyController,

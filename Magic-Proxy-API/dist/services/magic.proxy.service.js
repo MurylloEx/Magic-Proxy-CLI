@@ -65,7 +65,6 @@ let MagicProxyService = class MagicProxyService {
                 let settings = yield this.settingsService.findLast();
                 let proxies = yield this.proxyService.findAll();
                 let [defaultProxy] = proxies.filter(v => !!v.isDefault);
-                console.log(tls, settings, proxies, defaultProxy);
                 this.m_ProxyTrigger = (0, magic_reverse_proxy_1.createProxy)({
                     enable_hsts: settings.hstsEnabled,
                     allow_unknown_host: settings.allowUnknownHost,
@@ -86,6 +85,7 @@ let MagicProxyService = class MagicProxyService {
                     },
                     proxies: proxies.filter(v => !v.isDefault).map(v => {
                         return {
+                            domain: v.domain,
                             timeout: v.timeout,
                             round: v.round,
                             destination: v.destinations.split('//:!//'),
@@ -99,7 +99,6 @@ let MagicProxyService = class MagicProxyService {
                         sockDestination: defaultProxy.websockDestinations.split('//:!//')
                     }
                 });
-                console.dir(this.m_ProxyTrigger);
                 this.bindProxy();
             }
             catch (e) {

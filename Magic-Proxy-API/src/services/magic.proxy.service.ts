@@ -52,8 +52,6 @@ export class MagicProxyService implements OnApplicationBootstrap{
       let proxies = await this.proxyService.findAll();
       let [defaultProxy] = proxies.filter(v => !!v.isDefault);
   
-      console.log(tls, settings, proxies, defaultProxy);
-
       this.m_ProxyTrigger = createProxy({
         enable_hsts: settings.hstsEnabled,
         allow_unknown_host: settings.allowUnknownHost,
@@ -74,6 +72,7 @@ export class MagicProxyService implements OnApplicationBootstrap{
         },
         proxies: proxies.filter(v => !v.isDefault).map(v => {
           return {
+            domain: v.domain,
             timeout: v.timeout,
             round: v.round,
             destination: v.destinations.split('//:!//'),
@@ -88,8 +87,6 @@ export class MagicProxyService implements OnApplicationBootstrap{
         }
       });
       
-      console.dir(this.m_ProxyTrigger);
-
       this.bindProxy();
     } catch (e){
       console.log('[Warning] ' + e.message);
