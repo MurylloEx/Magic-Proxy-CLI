@@ -11,8 +11,8 @@ import { ResponseService } from 'src/services/response.service';
   imports: [
     UsersModule,
     JwtModule.register({
-      secret: '<secret-key-here>',
-      signOptions: { expiresIn: '1d' },
+      secret: '8276f43a-21d1-4361-b18b-13be03f615ed',
+      signOptions: { expiresIn: '7d' },
     })
   ],
   providers: [

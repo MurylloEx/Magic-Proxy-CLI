@@ -27,7 +27,7 @@ let JwtStrategy = class JwtStrategy extends (0, passport_1.PassportStrategy)(pas
         super({
             jwtFromRequest: passport_jwt_1.ExtractJwt.fromAuthHeaderAsBearerToken(),
             ignoreExpiration: false,
-            secretOrKey: '<secret-key-here>',
+            secretOrKey: '8276f43a-21d1-4361-b18b-13be03f615ed',
         });
     }
     validate(payload) {

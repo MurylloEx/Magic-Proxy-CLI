@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthorizeGuard = void 0;
 const core_1 = require("@nestjs/core");
-const common_1 = require("@nestjs/common");
 const roles_enum_1 = require("../roles.enum");
+const common_1 = require("@nestjs/common");
 let AuthorizeGuard = class AuthorizeGuard {
     constructor(reflector) {
         this.reflector = reflector;

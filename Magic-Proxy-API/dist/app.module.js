@@ -25,6 +25,7 @@ const proxy_controller_1 = require("./controllers/proxy.controller");
 const settings_controller_1 = require("./controllers/settings.controller");
 const magic_proxy_service_1 = require("./services/magic.proxy.service");
 const response_service_1 = require("./services/response.service");
+const acme_service_1 = require("./services/acme.service");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -45,7 +46,8 @@ AppModule = __decorate([
             settings_service_1.SettingsService,
             tls_service_1.TlsService,
             magic_proxy_service_1.MagicProxyService,
-            response_service_1.ResponseService
+            response_service_1.ResponseService,
+            acme_service_1.AcmeService
         ],
         controllers: [
             proxy_controller_1.ProxyController,

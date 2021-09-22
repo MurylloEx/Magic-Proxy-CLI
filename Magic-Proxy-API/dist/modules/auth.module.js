@@ -22,8 +22,8 @@ AuthModule = __decorate([
         imports: [
             users_module_1.UsersModule,
             jwt_1.JwtModule.register({
-                secret: '<secret-key-here>',
-                signOptions: { expiresIn: '1d' },
+                secret: '8276f43a-21d1-4361-b18b-13be03f615ed',
+                signOptions: { expiresIn: '7d' },
             })
         ],
         providers: [

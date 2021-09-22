@@ -1,6 +1,6 @@
 {
   "name": "magic-proxy-cli",
-  "version": "0.0.16",
+  "version": "0.0.18",
   "description": "A reverse proxy based CLI that you can use to manage your webserver.",
   "author": "Muryllo Pimenta de Oliveira",
   "license": "MIT",

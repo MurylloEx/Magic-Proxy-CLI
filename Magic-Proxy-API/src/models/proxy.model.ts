@@ -23,7 +23,7 @@ export class ProxyModel extends BaseEntity {
 
   @ApiProperty(models.proxy.fields.domain)
   @IsDefined()
-  @MinLength(4)
+  @MinLength(1)
   @MaxLength(1024)
   @Column()
   public domain?: string;

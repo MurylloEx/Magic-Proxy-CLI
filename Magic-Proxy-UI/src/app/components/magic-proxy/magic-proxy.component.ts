@@ -31,8 +31,8 @@ export class MagicProxyComponent implements OnInit {
       this.m_Proxies = result.data.map(({ destinations, websockDestinations, ...rest }) => {
         return {
           ...rest,
-          destinations: destinations.split('//:!//'),
-          websockDestinations: websockDestinations.split('//:!//')
+          destinations: destinations.split('//:!//').filter(e => e),
+          websockDestinations: websockDestinations.split('//:!//').filter(e => e)
         }
       });
       this.notification.info()

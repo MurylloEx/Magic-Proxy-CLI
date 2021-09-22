@@ -58,7 +58,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiProperty)(swagger_json_1.models.proxy.fields.domain),
     (0, class_validator_1.IsDefined)(),
-    (0, class_validator_1.MinLength)(4),
+    (0, class_validator_1.MinLength)(1),
     (0, class_validator_1.MaxLength)(1024),
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)

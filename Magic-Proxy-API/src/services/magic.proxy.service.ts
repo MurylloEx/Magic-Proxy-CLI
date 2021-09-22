@@ -75,15 +75,15 @@ export class MagicProxyService implements OnApplicationBootstrap{
             domain: v.domain,
             timeout: v.timeout,
             round: v.round,
-            destination: v.destinations.split('//:!//'),
-            sockDestination: v.websockDestinations.split('//:!//')
+            destination: v.destinations.split('//:!//').filter(e => e),
+            sockDestination: v.websockDestinations.split('//:!//').filter(e => e)
           }
         }),
         default_proxy: {
           timeout: defaultProxy.timeout,
           round: defaultProxy.round,
-          destination: defaultProxy.destinations.split('//:!//'),
-          sockDestination: defaultProxy.websockDestinations.split('//:!//')
+          destination: defaultProxy.destinations.split('//:!//').filter(e => e),
+          sockDestination: defaultProxy.websockDestinations.split('//:!//').filter(e => e)
         }
       });
       
