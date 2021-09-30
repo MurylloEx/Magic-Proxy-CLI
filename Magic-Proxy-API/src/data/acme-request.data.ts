@@ -1,4 +1,4 @@
-import { ArrayMaxSize, ArrayMinSize, IsArray, IsDefined, IsEmail, IsFQDN, IsNotEmpty } from "class-validator";
+import { ArrayMaxSize, ArrayMinSize, IsArray, IsDefined, IsEmail, IsNotEmpty, IsString } from "class-validator";
 
 export class AcmeRequestData {
 
@@ -9,7 +9,7 @@ export class AcmeRequestData {
 
   @IsDefined()
   @IsArray()
-  @IsFQDN({}, { each: true })
+  @IsString({ each: true })
   @ArrayMinSize(1)
   @ArrayMaxSize(32)
   public domains: string[];

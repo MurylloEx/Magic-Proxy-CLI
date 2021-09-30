@@ -32,6 +32,7 @@ const roles_decorator_1 = require("../security/roles.decorator");
 const acme_service_1 = require("../services/acme.service");
 const response_service_1 = require("../services/response.service");
 const roles_enum_1 = require("../security/roles.enum");
+const timeout_interceptor_1 = require("../interceptors/timeout.interceptor");
 let AcmeController = class AcmeController {
     constructor(acmeService, responseService) {
         this.acmeService = acmeService;
@@ -66,18 +67,18 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], AcmeController.prototype, "requestCertificate", null);
 __decorate([
-    (0, common_1.Post)('request/:id/complete'),
+    (0, common_1.Get)('request/:id/complete'),
     (0, roles_decorator_1.Roles)(roles_enum_1.Roles.Manager),
-    openapi.ApiResponse({ status: 201, type: Object }),
+    openapi.ApiResponse({ status: 200, type: Object }),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], AcmeController.prototype, "completeRequest", null);
 __decorate([
-    (0, common_1.Post)('request/:id/certificate'),
+    (0, common_1.Get)('request/:id/certificate'),
     (0, roles_decorator_1.Roles)(roles_enum_1.Roles.Manager),
-    openapi.ApiResponse({ status: 201, type: Object }),
+    openapi.ApiResponse({ status: 200, type: Object }),
     __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
@@ -85,10 +86,11 @@ __decorate([
 ], AcmeController.prototype, "getCertificate", null);
 AcmeController = __decorate([
     (0, common_1.Controller)('acme'),
+    (0, swagger_1.ApiBearerAuth)(),
     (0, common_1.UseGuards)(authorize_guard_1.AuthorizeGuard),
     (0, common_1.UseFilters)(http_exception_filter_1.HttpExceptionFilter),
+    (0, common_1.UseInterceptors)(timeout_interceptor_1.TimeoutInterceptor),
     (0, common_1.UsePipes)(new common_1.ValidationPipe({ transform: true })),
-    (0, swagger_1.ApiBearerAuth)(),
     __metadata("design:paramtypes", [acme_service_1.AcmeService,
         response_service_1.ResponseService])
 ], AcmeController);

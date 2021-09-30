@@ -3,11 +3,22 @@
   <div class="mg-comp-container">
 
     <div *ngIf="m_StepIndex == 0">
+      <div class="magic-local-bordered p-shadow-1 p-p-2">
+        <div class="p-text-center">
+          <strong>Welcome to Certificate Wizard!</strong>
+        </div>
+        <p class="p-text-justify">
+          You can generate your own SSL certificates using Let's Encrypt/ACME Challenges free, 
+          easy and fast. You need just provide your email, a list of domains and complete all 
+          challenges to get your certificates.
+        </p>
+      </div>
+
       <div class="p-inputgroup p-mt-5">
         <span class="p-inputgroup-addon"><i class="pi pi-envelope"></i></span>
         <span class="p-float-label">
           <input 
-            type="text" 
+            type="email" 
             pInputText 
             id="mail-address" 
             [(ngModel)]="m_ContactEmail">
@@ -41,11 +52,11 @@
         </p>
       </div>
 
-      <div class="magic-local-bordered p-shadow-1">
+      <div *ngFor="let challenge of m_Challenges;" class="magic-local-bordered p-shadow-1">
         <p>
-          <b><i class="pi pi-info-circle"></i> Domain:</b> muryllo.com.br<br>
+          <b><i class="pi pi-info-circle"></i> Domain:</b> {{challenge.auth.identifier.value}}<br>
           <b><i class="pi pi-info-circle"></i> Record type:</b> TXT<br>
-          <b><i class="pi pi-info-circle"></i> Record content:</b> cZ4hHafr-7zxYS9Bk9-UIOKD5JVlwZYOX_oXbw-FQYI
+          <b><i class="pi pi-info-circle"></i> Record content:</b> {{challenge.key}}
         </p>
       </div>
 
@@ -60,7 +71,7 @@
           type="text" 
           rows="8" 
           placeholder="Private key in .PEM format..."
-          [(ngModel)]="m_DomainNames">
+          [(ngModel)]="m_PrivateKey">
         </textarea>
       </div>
 
@@ -71,7 +82,7 @@
           type="text" 
           rows="8" 
           placeholder="Public key and certificate in .PEM format..."
-          [(ngModel)]="m_DomainNames">
+          [(ngModel)]="m_Certificate">
         </textarea>
       </div>
 
@@ -82,12 +93,11 @@
           type="text" 
           rows="8" 
           placeholder="Certificate signing request (CSR) in .PEM format..."
-          [(ngModel)]="m_DomainNames">
+          [(ngModel)]="m_CertificateSigningRequest">
         </textarea>
       </div>
 
     </div>
-
 
     <div class="p-grid p-jc-center p-mr-auto p-ml-auto p-mt-4">
       <button 
@@ -97,7 +107,7 @@
         pButton 
         pTooltip="Request another certificate"
         tooltipPosition="top"
-        icon="pi pi-angle-left"
+        icon="pi pi-undo"
         label="Request another certificate"
         class="p-button-info p-button-outlined p-button-rounded p-ml-1 p-mr-1">
       </button>
@@ -106,9 +116,11 @@
         (click)="onPreviousStep($event)"
         pRipple 
         pButton 
+        [disabled]="m_IsLoading"
         pTooltip="Previous"
         tooltipPosition="left"
-        icon="pi pi-angle-left"
+        [icon]="'pi ' + (m_IsLoading ? 'pi-spin pi-spinner' : 'pi pi-angle-left')"
+        iconPos="left"
         label="Previous"
         class="p-button-info p-button-outlined p-button-rounded p-ml-1 p-mr-1">
       </button>
@@ -117,9 +129,11 @@
         (click)="onNextStep($event)"
         pRipple 
         pButton 
+        [disabled]="m_IsLoading"
         pTooltip="Advance"
         tooltipPosition="right"
-        icon="pi pi-angle-right"
+        [icon]="'pi ' + (m_IsLoading ? 'pi-spin pi-spinner' : 'pi-angle-right')"
+        iconPos="right"
         label="Advance"
         class="p-button-info p-button-outlined p-button-rounded p-ml-1">
       </button>

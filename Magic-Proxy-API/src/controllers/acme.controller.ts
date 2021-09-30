@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, UseFilters, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post, UseFilters, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiBearerAuth } from '@nestjs/swagger';
 import { AcmeRequestData } from 'src/data/acme-request.data';
 import { HttpExceptionFilter } from 'src/filters/http-exception.filter';
@@ -7,12 +7,14 @@ import { Roles } from 'src/security/roles.decorator';
 import { AcmeService } from 'src/services/acme.service';
 import { ResponseService } from 'src/services/response.service';
 import { Roles as Permissions } from 'src/security/roles.enum';
+import { TimeoutInterceptor } from 'src/interceptors/timeout.interceptor';
 
 @Controller('acme')
+@ApiBearerAuth()
 @UseGuards(AuthorizeGuard)
 @UseFilters(HttpExceptionFilter)
+@UseInterceptors(TimeoutInterceptor)
 @UsePipes(new ValidationPipe({ transform: true }))
-@ApiBearerAuth()
 export class AcmeController {
 
   constructor(

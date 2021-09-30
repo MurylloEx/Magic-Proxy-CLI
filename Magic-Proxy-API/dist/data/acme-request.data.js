@@ -22,7 +22,7 @@ __decorate([
 __decorate([
     (0, class_validator_1.IsDefined)(),
     (0, class_validator_1.IsArray)(),
-    (0, class_validator_1.IsFQDN)({}, { each: true }),
+    (0, class_validator_1.IsString)({ each: true }),
     (0, class_validator_1.ArrayMinSize)(1),
     (0, class_validator_1.ArrayMaxSize)(32),
     __metadata("design:type", Array)

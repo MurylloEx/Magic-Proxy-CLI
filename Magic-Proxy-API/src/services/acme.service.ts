@@ -29,7 +29,7 @@ export class AcmeService {
 
   async createOrders(email: string, domains: string[]){
     const client = new Client({
-      directoryUrl: directory.letsencrypt.staging,
+      directoryUrl: directory.letsencrypt.production,
       accountKey: await forge.createPrivateKey()
     });
     const account = await client.createAccount({
@@ -114,7 +114,7 @@ export class AcmeService {
       const { client } = orderResponse;
       let result = await this.waitForChallenges(client, challengeResponses);
       if (result != 0){
-        this.AcmeOrders.splice(requestId, 1);
+        delete this.AcmeOrders[requestId];
         throw new Error();
       }
       return true;
@@ -125,9 +125,10 @@ export class AcmeService {
 
   async getCertificates(requestId: number){
     try{
-      const [{ orderResponse, acmeRequestData }] = this.AcmeOrders.splice(requestId,1);
+      const { orderResponse, acmeRequestData } = this.AcmeOrders[requestId];
       const { client, order } = orderResponse;
       const { domains } = acmeRequestData;
+      delete this.AcmeOrders[requestId];
       let certificates = await this.generateCertificates(client, order, domains[0], domains);
       if (!certificates)
         throw new Error();

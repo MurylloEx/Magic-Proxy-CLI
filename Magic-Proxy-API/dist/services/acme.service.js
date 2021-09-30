@@ -118,7 +118,7 @@ let AcmeService = class AcmeService {
                 const { client } = orderResponse;
                 let result = yield this.waitForChallenges(client, challengeResponses);
                 if (result != 0) {
-                    this.AcmeOrders.splice(requestId, 1);
+                    delete this.AcmeOrders[requestId];
                     throw new Error();
                 }
                 return true;
@@ -131,9 +131,10 @@ let AcmeService = class AcmeService {
     getCertificates(requestId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const [{ orderResponse, acmeRequestData }] = this.AcmeOrders.splice(requestId, 1);
+                const { orderResponse, acmeRequestData } = this.AcmeOrders[requestId];
                 const { client, order } = orderResponse;
                 const { domains } = acmeRequestData;
+                delete this.AcmeOrders[requestId];
                 let certificates = yield this.generateCertificates(client, order, domains[0], domains);
                 if (!certificates)
                     throw new Error();
