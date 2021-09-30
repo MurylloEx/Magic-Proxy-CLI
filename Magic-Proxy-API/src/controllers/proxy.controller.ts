@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UseFilters, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { HttpExceptionFilter } from 'src/filters/http-exception.filter';
 import { AuthorizeGuard } from 'src/security/guards/authorize.guard';
-import { Roles as KnownRoles } from 'src/security/roles.enum';
+import { Roles as Permissions } from 'src/security/roles.enum';
 import { Roles } from 'src/security/roles.decorator';
 import { ProxyService } from 'src/services/proxy.service';
 import { ProxyModel } from 'src/models/proxy.model';
@@ -22,13 +22,13 @@ export class ProxyController {
     private response: ResponseService){}
 
   @Get()
-  @Roles(KnownRoles.Manager)
+  @Roles(Permissions.Manager)
   public async getProxies(){
     return this.response.build(await this.proxyService.findAll());
   }
 
   @Post()
-  @Roles(KnownRoles.Manager)
+  @Roles(Permissions.Manager)
   public async addProxy(@Body() data: ProxyModel){
     const response = await this.proxyService.insert(data);
     await this.magicProxyService.reloadProxy();
@@ -36,7 +36,7 @@ export class ProxyController {
   }
 
   @Put(':id')
-  @Roles(KnownRoles.Manager)
+  @Roles(Permissions.Manager)
   public async updateProxy(@Param('id') id: string, @Body() data: ProxyModel){
     const response = await this.proxyService.updateOne(id, data);
     await this.magicProxyService.reloadProxy();
@@ -44,7 +44,7 @@ export class ProxyController {
   }
 
   @Delete(':id')
-  @Roles(KnownRoles.Manager)
+  @Roles(Permissions.Manager)
   public async deleteProxy(@Param('id') id: string){
     await this.proxyService.remove(id);
     await this.magicProxyService.reloadProxy();

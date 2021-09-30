@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -33,8 +34,9 @@ import { MagicSecurityComponent } from './components/magic-security/magic-securi
 import { MagicUserEntryComponent } from './components/magic-user-entry/magic-user-entry.component';
 import { MagicPreferenceComponent } from './components/magic-preference/magic-preference.component';
 import { MagicProxyEntryComponent } from './components/magic-proxy-entry/magic-proxy-entry.component';
+import { MagicCertificatesComponent } from './components/magic-certificates/magic-certificates.component';
 import { MagicProxyDestinationComponent } from './components/magic-proxy-destination/magic-proxy-destination.component';
-import { HttpClientModule } from '@angular/common/http';
+
 import { JwtAuthInterceptorService } from './hooks/jwt-auth.interceptor';
 import { ExpirationInterceptorService } from './hooks/expiration.interceptor';
 
@@ -54,6 +56,7 @@ import { ExpirationInterceptorService } from './hooks/expiration.interceptor';
     MagicUserEntryComponent,
     MagicPreferenceComponent,
     MagicProxyEntryComponent,
+    MagicCertificatesComponent,
     MagicProxyDestinationComponent
   ],
   imports: [

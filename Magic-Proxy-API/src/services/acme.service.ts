@@ -1,22 +1,31 @@
-import { Injectable } from '@nestjs/common';
+import { AcmeRequestData } from 'src/data/acme-request.data';
 import { Account, Challenge } from 'acme-client/types/rfc8555';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { Client, forge, directory, Order, Authorization} from 'acme-client';
 
 export interface ChallengeResponse {
-  auth?: Authorization,
+  auth: Authorization,
   challenge?: Challenge,
-  key?: string,
-  success?: boolean
+  key: string,
+  success: boolean
 }
 
 export interface OrderResponse {
-  client?: Client,
-  account?: Account,
-  order?: Order
+  client: Client,
+  account: Account,
+  order: Order
+}
+
+export interface AcmeOrderChallenge {
+  orderResponse: OrderResponse,
+  challengeResponses: ChallengeResponse[],
+  acmeRequestData: AcmeRequestData
 }
 
 @Injectable()
 export class AcmeService {
+
+  private AcmeOrders: AcmeOrderChallenge[] = [];
 
   async createOrders(email: string, domains: string[]){
     const client = new Client({
@@ -53,7 +62,7 @@ export class AcmeService {
     for (let c = 0; c < challenges.length; c++){
       const {challenge, auth} = challenges[c];
       try {
-        if (!challenge || !auth)
+        if (!challenge || !challenges[c]?.success)
           throw new Error();
         /* Verify that challenge is satisfied */
         await client.verifyChallenge(auth, challenge);
@@ -68,14 +77,69 @@ export class AcmeService {
   }
   
   async generateCertificates(client: Client, order: Order, commonName: string, altNames: string[]){
-    /* Finalize order */
-    const [key, csr] = await forge.createCsr({
-      commonName: commonName,
-      altNames: altNames
-    });
-    await client.finalizeOrder(order, csr);
-    const cert = Buffer.from(await client.getCertificate(order));
-    return {csr, key, cert}
+    try{
+      const [key, csr] = await forge.createCsr({
+        commonName: commonName,
+        altNames: altNames
+      });
+      await client.finalizeOrder(order, csr);
+      const cert = Buffer.from(await client.getCertificate(order));
+      return {csr, key, cert}
+    } catch(_) { return false }
   }
-  
+
+  async createRequest(data: AcmeRequestData){
+    try{
+      let orderResponse = await this.createOrders(data.email, data.domains);
+      let challengeResponses = await this.getChallenges(
+        orderResponse.client,
+        orderResponse.order);
+      this.AcmeOrders.push({
+        orderResponse,
+        challengeResponses,
+        acmeRequestData: data
+      });
+      return { 
+        id: this.AcmeOrders.length-1,
+        challenges: challengeResponses
+      }
+    } catch(_){
+      throw new BadRequestException("Couldn't create the request for ACME challenges.");
+    }
+  }
+
+  async completeChallenges(requestId: number){
+    try{
+      const { orderResponse, challengeResponses } = this.AcmeOrders[requestId];
+      const { client } = orderResponse;
+      let result = await this.waitForChallenges(client, challengeResponses);
+      if (result != 0){
+        this.AcmeOrders.splice(requestId, 1);
+        throw new Error();
+      }
+      return true;
+    } catch(_){
+      throw new BadRequestException("Couldn't complete the ACME request.");
+    }
+  }
+
+  async getCertificates(requestId: number){
+    try{
+      const [{ orderResponse, acmeRequestData }] = this.AcmeOrders.splice(requestId,1);
+      const { client, order } = orderResponse;
+      const { domains } = acmeRequestData;
+      let certificates = await this.generateCertificates(client, order, domains[0], domains);
+      if (!certificates)
+        throw new Error();
+      const { cert, key, csr } = certificates;
+      return {
+        cert: cert.toString(),
+        key: key.toString(),
+        csr: csr.toString()
+      }
+    } catch(_){
+      throw new BadRequestException("Couldn't generate the certificates.");
+    }
+  }
+
 }

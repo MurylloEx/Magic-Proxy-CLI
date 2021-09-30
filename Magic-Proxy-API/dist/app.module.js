@@ -12,6 +12,7 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const serve_static_1 = require("@nestjs/serve-static");
 const auth_module_1 = require("./modules/auth.module");
+const acme_module_1 = require("./modules/acme.module");
 const users_module_1 = require("./modules/users.module");
 const database_module_1 = require("./modules/database.module");
 const tls_service_1 = require("./services/tls.service");
@@ -21,11 +22,10 @@ const tls_model_1 = require("./models/tls.model");
 const proxy_model_1 = require("./models/proxy.model");
 const settings_model_1 = require("./models/settings.model");
 const tls_controller_1 = require("./controllers/tls.controller");
+const response_service_1 = require("./services/response.service");
+const magic_proxy_service_1 = require("./services/magic.proxy.service");
 const proxy_controller_1 = require("./controllers/proxy.controller");
 const settings_controller_1 = require("./controllers/settings.controller");
-const magic_proxy_service_1 = require("./services/magic.proxy.service");
-const response_service_1 = require("./services/response.service");
-const acme_service_1 = require("./services/acme.service");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -34,6 +34,7 @@ AppModule = __decorate([
             database_module_1.DatabaseModule,
             users_module_1.UsersModule,
             auth_module_1.AuthModule,
+            acme_module_1.AcmeModule,
             typeorm_1.TypeOrmModule.forFeature([proxy_model_1.ProxyModel]),
             typeorm_1.TypeOrmModule.forFeature([settings_model_1.SettingsModel]),
             typeorm_1.TypeOrmModule.forFeature([tls_model_1.TlsModel]),
@@ -46,8 +47,7 @@ AppModule = __decorate([
             settings_service_1.SettingsService,
             tls_service_1.TlsService,
             magic_proxy_service_1.MagicProxyService,
-            response_service_1.ResponseService,
-            acme_service_1.AcmeService
+            response_service_1.ResponseService
         ],
         controllers: [
             proxy_controller_1.ProxyController,

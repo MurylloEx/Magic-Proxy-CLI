@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, UseFilters, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
-import { Roles as KnownRoles } from 'src/security/roles.enum';
+import { Roles as Permissions } from 'src/security/roles.enum';
 import { Roles } from 'src/security/roles.decorator';
 import { TlsService } from 'src/services/tls.service';
 import { HttpExceptionFilter } from 'src/filters/http-exception.filter';
@@ -22,13 +22,13 @@ export class TlsController {
     private response: ResponseService){}
 
   @Get()
-  @Roles(KnownRoles.Manager)
+  @Roles(Permissions.Manager)
   public async getTls(){
     return this.response.build(await this.tlsService.findAll());
   }
 
   @Post()
-  @Roles(KnownRoles.Manager)
+  @Roles(Permissions.Manager)
   public async addTls(@Body() data: TlsModel){
     const response = await this.tlsService.insert(data);
     await this.magicProxyService.reloadProxy();
@@ -36,7 +36,7 @@ export class TlsController {
   }
 
   @Delete(':id')
-  @Roles(KnownRoles.Manager)
+  @Roles(Permissions.Manager)
   public async deleteTls(@Param('id') id: string){
     await this.tlsService.remove(id);
     await this.magicProxyService.reloadProxy();

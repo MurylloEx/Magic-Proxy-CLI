@@ -1,0 +1,130 @@
+<magic-section mgIcon="pi-cog" mgTitle="Certificates">
+
+  <div class="mg-comp-container">
+
+    <div *ngIf="m_StepIndex == 0">
+      <div class="p-inputgroup p-mt-5">
+        <span class="p-inputgroup-addon"><i class="pi pi-envelope"></i></span>
+        <span class="p-float-label">
+          <input 
+            type="text" 
+            pInputText 
+            id="mail-address" 
+            [(ngModel)]="m_ContactEmail">
+          <label for="mail-address">Contact Email</label>
+        </span>
+      </div>
+
+      <div class="p-inputgroup p-mt-3">
+        <span class="p-inputgroup-addon"><i class="pi pi-globe"></i></span>
+        <textarea 
+          pInputTextarea 
+          type="text" 
+          rows="8" 
+          placeholder="Domain names (place one per line)..."
+          [(ngModel)]="m_DomainNames">
+        </textarea>
+      </div>
+    </div>
+
+    <div *ngIf="m_StepIndex == 1">
+
+      <div class="magic-local-bordered p-shadow-1 p-p-2">
+        <div class="p-text-center">
+          <strong>Attention!</strong>
+        </div>
+        <p class="p-text-justify">
+          To complete issuing your SSL certificates you 
+          need to create a DNS record in the following domains with the 
+          path <b>_acme-challenge.&lt;domain-name&gt;</b> and specify the 
+          provided value.
+        </p>
+      </div>
+
+      <div class="magic-local-bordered p-shadow-1">
+        <p>
+          <b><i class="pi pi-info-circle"></i> Domain:</b> muryllo.com.br<br>
+          <b><i class="pi pi-info-circle"></i> Record type:</b> TXT<br>
+          <b><i class="pi pi-info-circle"></i> Record content:</b> cZ4hHafr-7zxYS9Bk9-UIOKD5JVlwZYOX_oXbw-FQYI
+        </p>
+      </div>
+
+    </div>
+
+    <div *ngIf="m_StepIndex == 2">
+
+      <div class="p-inputgroup p-mt-5">
+        <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
+        <textarea 
+          pInputTextarea 
+          type="text" 
+          rows="8" 
+          placeholder="Private key in .PEM format..."
+          [(ngModel)]="m_DomainNames">
+        </textarea>
+      </div>
+
+      <div class="p-inputgroup p-mt-3">
+        <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
+        <textarea 
+          pInputTextarea 
+          type="text" 
+          rows="8" 
+          placeholder="Public key and certificate in .PEM format..."
+          [(ngModel)]="m_DomainNames">
+        </textarea>
+      </div>
+
+      <div class="p-inputgroup p-mt-3">
+        <span class="p-inputgroup-addon"><i class="pi pi-lock-open"></i></span>
+        <textarea 
+          pInputTextarea 
+          type="text" 
+          rows="8" 
+          placeholder="Certificate signing request (CSR) in .PEM format..."
+          [(ngModel)]="m_DomainNames">
+        </textarea>
+      </div>
+
+    </div>
+
+
+    <div class="p-grid p-jc-center p-mr-auto p-ml-auto p-mt-4">
+      <button 
+        *ngIf="(m_StepIndex == 2)"
+        (click)="m_StepIndex = 0"
+        pRipple 
+        pButton 
+        pTooltip="Request another certificate"
+        tooltipPosition="top"
+        icon="pi pi-angle-left"
+        label="Request another certificate"
+        class="p-button-info p-button-outlined p-button-rounded p-ml-1 p-mr-1">
+      </button>
+      <button 
+        *ngIf="(m_StepIndex > 0) && (m_StepIndex != 2)"
+        (click)="onPreviousStep($event)"
+        pRipple 
+        pButton 
+        pTooltip="Previous"
+        tooltipPosition="left"
+        icon="pi pi-angle-left"
+        label="Previous"
+        class="p-button-info p-button-outlined p-button-rounded p-ml-1 p-mr-1">
+      </button>
+      <button 
+        *ngIf="m_StepIndex < 2"
+        (click)="onNextStep($event)"
+        pRipple 
+        pButton 
+        pTooltip="Advance"
+        tooltipPosition="right"
+        icon="pi pi-angle-right"
+        label="Advance"
+        class="p-button-info p-button-outlined p-button-rounded p-ml-1">
+      </button>
+    </div>
+
+  </div>
+
+</magic-section>

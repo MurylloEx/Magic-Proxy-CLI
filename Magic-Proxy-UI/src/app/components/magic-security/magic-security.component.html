@@ -1,35 +1,39 @@
 <magic-section mgIcon="pi-shield" mgTitle="Security settings">
+
+  <div class="mg-comp-container">
   
-  <div class="p-inputgroup p-mt-2">
-    <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
-    <textarea 
-      pInputTextarea 
-      type="text" 
-      rows="8" 
-      placeholder="Private key in .PEM format..."
-      [(ngModel)]="m_TlsData.PrivateKey">
-    </textarea>
-  </div>
+    <div class="p-inputgroup p-mt-5">
+      <span class="p-inputgroup-addon"><i class="pi pi-key"></i></span>
+      <textarea 
+        pInputTextarea 
+        type="text" 
+        rows="8" 
+        placeholder="Private key in .PEM format..."
+        [(ngModel)]="m_TlsData.PrivateKey">
+      </textarea>
+    </div>
+  
+    <div class="p-inputgroup p-mt-2">
+      <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
+      <textarea 
+        pInputTextarea 
+        type="text" 
+        rows="8" 
+        placeholder="Public key and certificate in .PEM format..."
+        [(ngModel)]="m_TlsData.Certificate">
+      </textarea>
+    </div>
+  
+    <div class="p-text-center p-mt-4">
+      <button
+        (click)="onApplyChanges($event)"
+        pRipple
+        pButton
+        class="p-button-success p-button-outlined p-button-rounded"
+        label="Apply changes">
+      </button>
+    </div>
 
-  <div class="p-inputgroup p-mt-2">
-    <span class="p-inputgroup-addon"><i class="pi pi-lock"></i></span>
-    <textarea 
-      pInputTextarea 
-      type="text" 
-      rows="8" 
-      placeholder="Public key and certificate in .PEM format..."
-      [(ngModel)]="m_TlsData.Certificate">
-    </textarea>
-  </div>
-
-  <div class="p-text-center p-mt-4">
-    <button
-      (click)="onApplyChanges($event)"
-      pRipple
-      pButton
-      class="p-button-success p-button-outlined p-button-rounded"
-      label="Apply changes">
-    </button>
   </div>
 
 </magic-section>

@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, UseFilters, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { HttpExceptionFilter } from 'src/filters/http-exception.filter';
 import { AuthorizeGuard } from 'src/security/guards/authorize.guard';
-import { Roles as KnownRoles } from 'src/security/roles.enum';
+import { Roles as Permissions } from 'src/security/roles.enum';
 import { Roles } from 'src/security/roles.decorator';
 import { UsersService } from 'src/services/users.service';
 import { UserModel } from 'src/models/user.model';
@@ -20,25 +20,25 @@ export class UsersController {
     private response: ResponseService){}
 
   @Get()
-  @Roles(KnownRoles.Manager)
+  @Roles(Permissions.Manager)
   public async getUsers(){
     return this.response.build(await this.usersService.findAll());
   }
 
   @Post()
-  @Roles(KnownRoles.Manager)
+  @Roles(Permissions.Manager)
   public async createUser(@Body() data: UserModel){
     return this.response.build(await this.usersService.insert(data));
   }
 
   @Put(':id')
-  @Roles(KnownRoles.Manager)
+  @Roles(Permissions.Manager)
   public async updateUser(@Param('id') id: string, @Body() data: UserModel){
     return this.response.build(await this.usersService.updateOne(id, data));
   }
 
   @Delete(':id')
-  @Roles(KnownRoles.Manager)
+  @Roles(Permissions.Manager)
   public async deleteUser(@Param('id') id: string){
     await this.usersService.remove(id);
     return this.response.build();

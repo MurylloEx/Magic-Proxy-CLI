@@ -1,0 +1,7 @@
+.magic-local-bordered {
+  margin-top: 1rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  border-radius: 3px;
+  border: 1px solid var(--surface-e);
+}

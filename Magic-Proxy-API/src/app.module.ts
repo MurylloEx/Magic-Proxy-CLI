@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ServeStaticModule } from '@nestjs/serve-static';
 
 import { AuthModule } from './modules/auth.module';
+import { AcmeModule } from './modules/acme.module';
 import { UsersModule } from './modules/users.module';
 import { DatabaseModule } from './modules/database.module';
 
@@ -16,17 +17,18 @@ import { ProxyModel } from './models/proxy.model';
 import { SettingsModel } from './models/settings.model';
 
 import { TlsController } from './controllers/tls.controller';
+import { ResponseService } from './services/response.service';
+import { MagicProxyService } from './services/magic.proxy.service';
+
 import { ProxyController } from './controllers/proxy.controller';
 import { SettingsController } from './controllers/settings.controller';
-import { MagicProxyService } from './services/magic.proxy.service';
-import { ResponseService } from './services/response.service';
-import { AcmeService } from './services/acme.service';
 
 @Module({
   imports: [
     DatabaseModule,
     UsersModule,
     AuthModule,
+    AcmeModule,
     TypeOrmModule.forFeature([ProxyModel]),
     TypeOrmModule.forFeature([SettingsModel]),
     TypeOrmModule.forFeature([TlsModel]),
@@ -39,8 +41,7 @@ import { AcmeService } from './services/acme.service';
     SettingsService,
     TlsService,
     MagicProxyService,
-    ResponseService,
-    AcmeService
+    ResponseService
   ],
   controllers: [
     ProxyController,

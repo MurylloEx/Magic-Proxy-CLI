@@ -6,7 +6,7 @@ import { HttpService } from './http.service';
 })
 export class ApiService {
 
-  private m_ApiAddress: string = window.location.protocol + '//' + window.location.host;
+  private m_ApiAddress: string = window.location.protocol + '//' + window.location.host + ':3000';
   private m_ApiBase: string = "/v1/api";
 
   constructor(private http: HttpService) { }
@@ -109,6 +109,24 @@ export class ApiService {
     return this.http.post(
       this.getApiBase() + "/auth", data,
       { ...HttpService.JsonHeader });
+  }
+
+  createAcmeRequest(data: any) {
+    return this.http.post(
+      this.getApiBase() + "/acme/request", data,
+      { ...HttpService.AuthHeader, ...HttpService.JsonHeader });
+  }
+
+  completeAcmeRequest(requestId: number) {
+    return this.http.get(
+      this.getApiBase() + "/acme/request/" + encodeURIComponent(requestId) + "/complete", 
+      { ...HttpService.AuthHeader, ...HttpService.JsonHeader });
+  }
+
+  fetchAcmeRequestCertificate(requestId: number) {
+    return this.http.get(
+      this.getApiBase() + "/acme/request/" + encodeURIComponent(requestId) + "/certificate", 
+      { ...HttpService.AuthHeader, ...HttpService.JsonHeader });
   }
 
 }

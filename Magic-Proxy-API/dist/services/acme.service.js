@@ -16,9 +16,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AcmeService = void 0;
+const acme_request_data_1 = require("../data/acme-request.data");
 const common_1 = require("@nestjs/common");
 const acme_client_1 = require("acme-client");
 let AcmeService = class AcmeService {
+    constructor() {
+        this.AcmeOrders = [];
+    }
     createOrders(email, domains) {
         return __awaiter(this, void 0, void 0, function* () {
             const client = new acme_client_1.Client({
@@ -52,12 +56,13 @@ let AcmeService = class AcmeService {
         });
     }
     waitForChallenges(client, challenges) {
+        var _a;
         return __awaiter(this, void 0, void 0, function* () {
             let e = 0;
             for (let c = 0; c < challenges.length; c++) {
                 const { challenge, auth } = challenges[c];
                 try {
-                    if (!challenge || !auth)
+                    if (!challenge || !((_a = challenges[c]) === null || _a === void 0 ? void 0 : _a.success))
                         throw new Error();
                     yield client.verifyChallenge(auth, challenge);
                     yield client.completeChallenge(challenge);
@@ -72,13 +77,76 @@ let AcmeService = class AcmeService {
     }
     generateCertificates(client, order, commonName, altNames) {
         return __awaiter(this, void 0, void 0, function* () {
-            const [key, csr] = yield acme_client_1.forge.createCsr({
-                commonName: commonName,
-                altNames: altNames
-            });
-            yield client.finalizeOrder(order, csr);
-            const cert = Buffer.from(yield client.getCertificate(order));
-            return { csr, key, cert };
+            try {
+                const [key, csr] = yield acme_client_1.forge.createCsr({
+                    commonName: commonName,
+                    altNames: altNames
+                });
+                yield client.finalizeOrder(order, csr);
+                const cert = Buffer.from(yield client.getCertificate(order));
+                return { csr, key, cert };
+            }
+            catch (_) {
+                return false;
+            }
+        });
+    }
+    createRequest(data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                let orderResponse = yield this.createOrders(data.email, data.domains);
+                let challengeResponses = yield this.getChallenges(orderResponse.client, orderResponse.order);
+                this.AcmeOrders.push({
+                    orderResponse,
+                    challengeResponses,
+                    acmeRequestData: data
+                });
+                return {
+                    id: this.AcmeOrders.length - 1,
+                    challenges: challengeResponses
+                };
+            }
+            catch (_) {
+                throw new common_1.BadRequestException("Couldn't create the request for ACME challenges.");
+            }
+        });
+    }
+    completeChallenges(requestId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const { orderResponse, challengeResponses } = this.AcmeOrders[requestId];
+                const { client } = orderResponse;
+                let result = yield this.waitForChallenges(client, challengeResponses);
+                if (result != 0) {
+                    this.AcmeOrders.splice(requestId, 1);
+                    throw new Error();
+                }
+                return true;
+            }
+            catch (_) {
+                throw new common_1.BadRequestException("Couldn't complete the ACME request.");
+            }
+        });
+    }
+    getCertificates(requestId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const [{ orderResponse, acmeRequestData }] = this.AcmeOrders.splice(requestId, 1);
+                const { client, order } = orderResponse;
+                const { domains } = acmeRequestData;
+                let certificates = yield this.generateCertificates(client, order, domains[0], domains);
+                if (!certificates)
+                    throw new Error();
+                const { cert, key, csr } = certificates;
+                return {
+                    cert: cert.toString(),
+                    key: key.toString(),
+                    csr: csr.toString()
+                };
+            }
+            catch (_) {
+                throw new common_1.BadRequestException("Couldn't generate the certificates.");
+            }
         });
     }
 };
