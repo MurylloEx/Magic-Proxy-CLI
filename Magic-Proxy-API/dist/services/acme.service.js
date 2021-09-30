@@ -26,7 +26,7 @@ let AcmeService = class AcmeService {
     createOrders(email, domains) {
         return __awaiter(this, void 0, void 0, function* () {
             const client = new acme_client_1.Client({
-                directoryUrl: acme_client_1.directory.letsencrypt.staging,
+                directoryUrl: acme_client_1.directory.letsencrypt.production,
                 accountKey: yield acme_client_1.forge.createPrivateKey()
             });
             const account = yield client.createAccount({

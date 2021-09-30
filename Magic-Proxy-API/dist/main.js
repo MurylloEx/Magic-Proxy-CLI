@@ -13,10 +13,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const yargs_1 = __importDefault(require("yargs"));
+const swagger_json_1 = __importDefault(require("./docs/swagger.json"));
 const app_module_1 = require("./app.module");
 const core_1 = require("@nestjs/core");
 const swagger_1 = require("@nestjs/swagger");
-const swagger_json_1 = __importDefault(require("./docs/swagger.json"));
 function setupSwagger(app) {
     const config = new swagger_1.DocumentBuilder()
         .setTitle(swagger_json_1.default.title)
@@ -27,14 +28,24 @@ function setupSwagger(app) {
         .build();
     return swagger_1.SwaggerModule.setup(swagger_json_1.default.path, app, swagger_1.SwaggerModule.createDocument(app, config));
 }
-function bootstrap() {
+function bootstrap(port) {
     return __awaiter(this, void 0, void 0, function* () {
         const app = yield yield core_1.NestFactory.create(app_module_1.AppModule);
         app.setGlobalPrefix('/v1/api');
         app.enableCors();
         setupSwagger(app);
-        yield app.listen(3000);
+        yield app.listen(port);
     });
 }
-bootstrap();
+const argv = yargs_1.default
+    .command('port', 'Define the port of Magic Proxy Webpanel.', {
+    'port': {
+        description: 'Define the port of Magic Proxy Webpanel.',
+        type: 'number'
+    }
+})
+    .help()
+    .alias('help', 'h')
+    .argv;
+bootstrap(Number(argv['port'] || 3000));
 //# sourceMappingURL=main.js.map

@@ -1,9 +1,10 @@
 #!/usr/bin/env node
+import yargs from 'yargs';
+import Docs from './docs/swagger.json';
 import { AppModule } from './app.module';
 import { NestFactory } from '@nestjs/core';
 import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import Docs from './docs/swagger.json';
 
 function setupSwagger(app: INestApplication){
   const config = new DocumentBuilder()
@@ -16,12 +17,25 @@ function setupSwagger(app: INestApplication){
   return SwaggerModule.setup(Docs.path, app, SwaggerModule.createDocument(app, config));
 }
 
-async function bootstrap() {
+async function bootstrap(port: number) {
   const app = await await NestFactory.create(AppModule);
   app.setGlobalPrefix('/v1/api');
   app.enableCors();
   setupSwagger(app);
-  await app.listen(3000);
+  await app.listen(port);
 }
 
-bootstrap();
+const argv = yargs
+  .command('port', 'Define the port of Magic Proxy Webpanel.', {
+    'port': {
+      description: 'Define the port of Magic Proxy Webpanel.',
+      type: 'number'
+    }
+  })
+  .help()
+  .alias('help', 'h')
+  .argv;
+
+bootstrap(Number(argv['port'] || 3000));
+
+

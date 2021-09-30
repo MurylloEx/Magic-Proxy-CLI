@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { AcmeRequestData } from 'src/data/acme-request.data';
 import { Account, Challenge } from 'acme-client/types/rfc8555';
 import { Client, Order, Authorization } from 'acme-client';
